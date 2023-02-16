@@ -18,11 +18,8 @@ public:
 	static void _register_methods();
 	void _init();
 
-	ChessPiece();
-	~ChessPiece();
-
-	void takeTurn();
-	void moveTo(int, int);
+	virtual void takeTurn() = 0;
+	virtual void moveTo(int, int) = 0;
 
 private:
 	ChessPieceType chessPieceType;

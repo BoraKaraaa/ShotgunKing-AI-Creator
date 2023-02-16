@@ -13,18 +13,5 @@ void ChessPiece::_init()
 
 }
 
-ChessPiece::ChessPiece() { }
 
-ChessPiece::~ChessPiece() { }
-
-
-void ChessPiece::takeTurn()
-{
-
-}
-
-void ChessPiece::moveTo(int x, int y)
-{
-
-}
 

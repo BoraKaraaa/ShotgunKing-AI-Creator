@@ -1,5 +1,14 @@
-#include "ChessPiece.h"
+#include "TurnController.h"
 #include "ChessBoard.h"
+
+#include "Pawn.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Rook.h"
+#include "Queen.h"
+#include "WhiteKing.h"
+
+#include "BlackKing.h"
 
 using namespace godot;
 
@@ -16,6 +25,18 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
+
+	register_class<TurnController>();
 	register_class<ChessBoard>();
-	register_class<ChessPiece>();
+
+	// Pieces
+	register_class<Pawn>();
+	register_class<Knight>();
+	register_class<Bishop>();
+	register_class<Rook>();
+	register_class<Queen>();
+	register_class<WhiteKing>();
+
+	register_class<BlackKing>();
+
 }

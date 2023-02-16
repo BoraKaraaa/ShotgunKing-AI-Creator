@@ -1,8 +1,4 @@
-﻿  ChessBoard.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(34,46): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(38,49): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
-  ChessPiece.cpp
-  GodotLib.cpp
-  Square.cpp
+﻿  GodotLib.cpp
+  Pawn.cpp
   Generating Code...
   KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll

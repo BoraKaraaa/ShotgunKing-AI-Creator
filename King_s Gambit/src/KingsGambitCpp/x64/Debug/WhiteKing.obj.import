@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/WhiteKing.obj-1a2b38f380e18b1a54434bbc902a81b3.mesh"
+
+[deps]
+
+files=[ "res://.import/WhiteKing.obj-1a2b38f380e18b1a54434bbc902a81b3.mesh" ]
+
+source_file="res://src/KingsGambitCpp/x64/Debug/WhiteKing.obj"
+dest_files=[ "res://.import/WhiteKing.obj-1a2b38f380e18b1a54434bbc902a81b3.mesh", "res://.import/WhiteKing.obj-1a2b38f380e18b1a54434bbc902a81b3.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
