@@ -72,25 +72,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>.</OutDir>
+    <OutDir>./</OutDir>
     <IncludePath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\godot-headers;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\core;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\gen;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>.</OutDir>
+    <OutDir>./</OutDir>
     <IncludePath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\godot-headers;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\core;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\gen;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>.</OutDir>
+    <OutDir>./</OutDir>
     <IncludePath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\godot-headers;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\core;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\gen;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>.</OutDir>
+    <OutDir>./</OutDir>
     <IncludePath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\godot-headers;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\core;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include\gen;C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bora\Documents\GODOT\GDNative_cpp\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
