@@ -17,6 +17,7 @@ ChessPiece::ChessPiece() { }
 
 ChessPiece::~ChessPiece() { }
 
+
 void ChessPiece::takeTurn()
 {
 
@@ -24,6 +25,6 @@ void ChessPiece::takeTurn()
 
 void ChessPiece::moveTo(int x, int y)
 {
-	//Square* square =
 
 }
+

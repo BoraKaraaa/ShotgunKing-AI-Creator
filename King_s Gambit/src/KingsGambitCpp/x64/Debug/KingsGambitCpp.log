@@ -1,18 +1,8 @@
-﻿  ChessPiece.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(23,24): error C2061: syntax error: identifier 'ChessPiece'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,12): error C2143: syntax error: missing ';' before '*'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,28): error C2238: unexpected token(s) preceding ';'
+﻿  ChessBoard.cpp
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(34,46): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(38,49): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
+  ChessPiece.cpp
   GodotLib.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(23,24): error C2061: syntax error: identifier 'ChessPiece'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,12): error C2143: syntax error: missing ';' before '*'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\Square.h(32,28): error C2238: unexpected token(s) preceding ';'
   Square.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(15,8): error C2143: syntax error: missing ';' before '*'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(15,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(15,23): error C2238: unexpected token(s) preceding ';'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(26,8): error C2143: syntax error: missing ';' before '*'
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(26,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(26,29): error C2238: unexpected token(s) preceding ';'
   Generating Code...
+  KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll

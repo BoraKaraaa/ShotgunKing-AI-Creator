@@ -3,7 +3,6 @@
 #include <KinematicBody2D.hpp>
 
 #include "ChessPieceType.h"
-#include "ChessBoard.h"
 
 
 using namespace godot;
