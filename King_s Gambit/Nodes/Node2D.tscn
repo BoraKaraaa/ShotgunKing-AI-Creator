@@ -1,0 +1,165 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Nodes/ChessBoard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Extras/ShotgunUI1.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Extras/Bullet1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Extras/Bullet2.png" type="Texture" id=6]
+[ext_resource path="res://Nodes/BlackKing.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Nodes/Test.gdns" type="Script" id=8]
+[ext_resource path="res://Nodes/KinematicBody2D.gdns" type="Script" id=9]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float scan_line_count : hint_range(0, 800) = 50.0;
+
+vec2 uv_curve(vec2 uv)
+{
+	//uv = (uv - 0.5) * 2.0;
+	
+	//uv.x *= 1.0 + pow(abs(uv.y) / 10.0, 2.0);
+	//uv.y *= 1.0 + pow(abs(uv.x) / 3.5, 2.0);
+	
+	//uv /= 1.2;
+	
+	return uv;
+}
+
+void fragment()
+{
+	float PI = 3.14;
+	float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*0.0), 0.0).r;
+	float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*1.0), 0.0).g;
+	float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*-1.0), 0.0).b;
+	
+	float s = sin(uv_curve(SCREEN_UV).y * scan_line_count * PI * 2.0);
+	
+	s = (s * 0.5 + 0.5) * 0.9 + 0.1;
+	
+	vec4 scan_line = vec4(vec3(pow(s, 0.25)), 1.0);
+	
+	
+	COLOR = vec4(r, g, b, 1.0) * scan_line;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/scan_line_count = 120.0
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="MainScene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource( 3 )
+margin_left = -1.99988
+margin_top = 2.0
+margin_right = 62.0001
+margin_bottom = 66.0
+rect_scale = Vector2( 12.5, 9.4 )
+texture = ExtResource( 4 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+process_priority = 10
+position = Vector2( 217, 125 )
+z_index = 10
+
+[node name="GameBG" type="ColorRect" parent="."]
+margin_left = -495.0
+margin_top = -405.0
+margin_right = -455.0
+margin_bottom = -365.0
+rect_scale = Vector2( 46.5121, 38.1331 )
+color = Color( 0.027451, 0.0431373, 0.0862745, 1 )
+
+[node name="GameUI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 20.0604, 14.9227 )
+
+[node name="MoveCount" type="Label" parent="GameUI"]
+margin_left = 12.7615
+margin_top = 36.3206
+margin_right = 116.761
+margin_bottom = 52.3206
+rect_scale = Vector2( 0.1, 0.1 )
+custom_fonts/font = SubResource( 1 )
+text = "Move Count "
+align = 1
+
+[node name="MoveCountAmount" type="Label" parent="GameUI"]
+margin_left = 19.7404
+margin_top = 36.3206
+margin_right = 118.74
+margin_bottom = 52.3206
+rect_scale = Vector2( 0.1, 0.1 )
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+
+[node name="Gun&Bullet" type="Node2D" parent="."]
+
+[node name="GunUi" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 288, 59 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 3 )
+
+[node name="CurrBulletH" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 230, 56 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 6 )
+
+[node name="Bullet1H" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 230, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 6 )
+
+[node name="Bullet2H" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 245, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 6 )
+
+[node name="Bullet3H" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 260, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 6 )
+
+[node name="CurrBullet" type="Sprite" parent="Gun&Bullet"]
+position = Vector2( 230, 56 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 5 )
+
+[node name="BulletHolder" type="Node2D" parent="Gun&Bullet"]
+
+[node name="Bullet1" type="Sprite" parent="Gun&Bullet/BulletHolder"]
+position = Vector2( 230, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 5 )
+
+[node name="Bullet2" type="Sprite" parent="Gun&Bullet/BulletHolder"]
+position = Vector2( 245, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 5 )
+
+[node name="Bullet3" type="Sprite" parent="Gun&Bullet/BulletHolder"]
+position = Vector2( 260, 87 )
+scale = Vector2( 4.01208, 2.98454 )
+texture = ExtResource( 5 )
+
+[node name="BlackKing" parent="." instance=ExtResource( 7 )]
+position = Vector2( 433, 376 )
+
+[node name="Test" type="Node2D" parent="."]
+position = Vector2( 289, 148 )
+script = ExtResource( 8 )
+
+[node name="Test2" type="Node2D" parent="."]
+position = Vector2( -44, -50 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Test2"]
+script = ExtResource( 9 )

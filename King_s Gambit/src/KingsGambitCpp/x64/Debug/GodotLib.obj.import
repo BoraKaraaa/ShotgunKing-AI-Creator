@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/GodotLib.obj-98013f73176721ab403cdb2cae00f212.mesh"
+
+[deps]
+
+files=[ "res://.import/GodotLib.obj-98013f73176721ab403cdb2cae00f212.mesh" ]
+
+source_file="res://src/KingsGambitCpp/x64/Debug/GodotLib.obj"
+dest_files=[ "res://.import/GodotLib.obj-98013f73176721ab403cdb2cae00f212.mesh", "res://.import/GodotLib.obj-98013f73176721ab403cdb2cae00f212.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

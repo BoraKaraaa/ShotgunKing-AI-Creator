@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Sprites/BlackStones/BlackKing1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/BlackStones/BlackKing2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/BlackStones/BlackKing3.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/BlackStones/BlackKing4.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/BlackStones/BlackKing5.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/BlackStones/BlackKing6.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/BlackStones/BlackKing7.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/BlackStones/BlackKing8.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/WhiteStones/Shotgun.png" type="Texture" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "Idle3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Idle5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle7",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=2]
+resource_name = "DirerctionController"
+script/source = "extends AnimatedSprite
+
+
+var current_animation = \"Idle\"
+var a = 0;
+
+
+func _process(delta):
+	
+	current_animation = \"Idle\"
+	
+	#mouse input
+	var mouse = get_local_mouse_position()
+	a = stepify(mouse.angle(), PI/4) / (PI/4)
+	a = wrapi(int(a), 0, 8)
+	
+	animation = current_animation + str(a)
+	
+	pass
+"
+
+[sub_resource type="GDScript" id=3]
+resource_name = "GunRotationController"
+script/source = "extends Sprite
+
+
+var a = 0;
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _process(delta):
+	
+	var mouse = get_global_mouse_position()
+	
+	var angle = rad2deg(Vector2.RIGHT.angle_to((mouse-get_parent().transform.origin)))
+	
+	if angle < 0:
+		angle += 360
+	
+	look_at(mouse)
+	
+	if angle > 270:
+		z_index = 4
+		flip_v = false
+	elif angle > 180: 
+		z_index = 4
+		flip_v = true
+	elif angle > 90:
+		z_index = 6
+		flip_v = true
+	elif angle > 0:
+		z_index = 6
+		flip_v = false
+		
+	pass
+"
+
+[node name="BlackKing" type="Node2D"]
+scale = Vector2( 3, 3 )
+z_index = 10
+
+[node name="KingSprite" type="Sprite" parent="."]
+z_index = 5
+texture = ExtResource( 1 )
+
+[node name="KingAnimation" type="AnimatedSprite" parent="KingSprite"]
+frames = SubResource( 1 )
+animation = "Idle2"
+script = SubResource( 2 )
+
+[node name="Gun" type="Sprite" parent="."]
+position = Vector2( -0.333333, 3.66667 )
+z_index = 6
+texture = ExtResource( 9 )
+offset = Vector2( 3.88, 0 )
+script = SubResource( 3 )
