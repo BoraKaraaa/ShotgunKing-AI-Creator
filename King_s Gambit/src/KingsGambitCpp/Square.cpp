@@ -1,5 +1,5 @@
 #include "Square.h"
-#include <stdio.h>
+
 
 Square::Square(int xIndex, int yIndex)
 {
@@ -27,7 +27,15 @@ bool Square::isSquareEmpty()
 
 void Square::setPieceToSquare(ChessPiece* chessPiece)
 {
+	if(chessPiece == nullptr)
+	{
+		currChessPiece = nullptr;
+		setSquareEmpty(true);
+		return;
+	}
+
 	currChessPiece = chessPiece;
+	setSquareEmpty(false);
 }
 
 void Square::setSquareEmpty(bool isSquareEmpty)

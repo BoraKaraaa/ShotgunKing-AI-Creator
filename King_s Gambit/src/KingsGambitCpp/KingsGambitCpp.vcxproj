@@ -164,13 +164,18 @@
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="ChessPieceType.h" />
+    <ClInclude Include="Gun.h" />
+    <ClInclude Include="GunType.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="PieceSpawner.h" />
     <ClInclude Include="Queen.h" />
     <ClInclude Include="Rook.h" />
+    <ClInclude Include="Sniper.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="TurnController.h" />
+    <ClInclude Include="TurnType.h" />
     <ClInclude Include="WhiteKing.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +184,13 @@
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
     <ClCompile Include="GodotLib.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="PieceSpawner.cpp" />
     <ClCompile Include="Queen.cpp" />
     <ClCompile Include="Rook.cpp" />
+    <ClCompile Include="Sniper.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TurnController.cpp" />

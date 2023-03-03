@@ -1,9 +1,9 @@
 #pragma once
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
+#include <Tween.hpp>
 
 #include "ChessPieceType.h"
-
 
 using namespace godot;
 
@@ -15,14 +15,27 @@ public:
 	int HealthAmount;
 	int TurnCount;
 
+	int currTurnCount;
+
+	int moveDuration;
+
+	int pX;
+	int pY;
+
+	Tween* tween;
+
 	static void _register_methods();
 	void _init();
+	void _ready();
 
-	virtual void takeTurn() = 0;
-	virtual void moveTo(int, int) = 0;
+	virtual void assignInitialDirections(int, int);
+	virtual void takeTurn();
+	virtual void moveTo(int, int);
+	virtual void moveTweenCompleted();
+	virtual void takeDamage();
+	virtual void die();
 
 private:
 	ChessPieceType chessPieceType;
-
 };
 

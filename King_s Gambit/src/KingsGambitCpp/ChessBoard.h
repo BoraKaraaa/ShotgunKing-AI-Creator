@@ -12,6 +12,9 @@ class ChessBoard : public TileMap
 	GODOT_CLASS(ChessBoard, TileMap);
 
 public:
+
+	static ChessBoard* chessBoardInstance;
+
 	Square*** squareArray;
 
 	static void _register_methods();
@@ -25,6 +28,15 @@ public:
 
 	Square* getSquare(int, int);
 
+	Vector2 getSquarePivotPosition(int, int);
+
+	void setChessPieceToSquare(ChessPiece*, int, int);
+
+	bool isSquareEmpty(int, int);
+
+	float twoSquareDistance(int, int, int, int);
+	int twoSquareDistanceWithSquare(int, int, int, int);
+
 
 private:
 	static Vector2 boardDimensions;
@@ -32,10 +44,12 @@ private:
 	float firstSquareXtransform;
 	float firstSquareYTransform;
 
-	float twoSquareDistanceDiff;
+	float twoSquareXDistanceDiff;
+	float twoSquareYDistanceDiff;
 
 	void initSquares();
 	void destroySquares();
 
+	void checkProperDirection(int*, int*);
 };
 

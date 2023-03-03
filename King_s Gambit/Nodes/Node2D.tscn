@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Nodes/ChessBoard.tscn" type="PackedScene" id=2]
@@ -6,14 +6,9 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Extras/Bullet1.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Extras/Bullet2.png" type="Texture" id=6]
-[ext_resource path="res://Nodes/Pieces/BlackKing.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/TurnController.gdns" type="Script" id=7]
 [ext_resource path="res://Scripts/Test.gdns" type="Script" id=8]
-[ext_resource path="res://Nodes/Pieces/Pawn.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Nodes/Pieces/Knight.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Nodes/Pieces/Bishop.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Nodes/Pieces/Rook.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Nodes/Pieces/Queen.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Nodes/Pieces/WhiteKing.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Nodes/PieceSpawner.gdns" type="Script" id=15]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -69,10 +64,14 @@ margin_bottom = 66.0
 rect_scale = Vector2( 12.5, 9.4 )
 texture = ExtResource( 4 )
 
-[node name="TileMap" parent="." instance=ExtResource( 2 )]
+[node name="ChessBoard" parent="." instance=ExtResource( 2 )]
 process_priority = 10
 position = Vector2( 217, 125 )
 z_index = 10
+firstSquareXtransform = 240.0
+firstSquareYTransform = 167.0
+twoSquareXDistanceDiff = 48.0
+twoSquareYDistanceDiff = 47.0
 
 [node name="GameBG" type="ColorRect" parent="."]
 margin_left = -495.0
@@ -156,47 +155,19 @@ position = Vector2( 260, 87 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 5 )
 
-[node name="BlackKing" parent="." instance=ExtResource( 7 )]
-position = Vector2( 433, 376 )
-
 [node name="Test" type="Node2D" parent="."]
-position = Vector2( 289, 148 )
+position = Vector2( 289, 167 )
 script = ExtResource( 8 )
 
-[node name="Pieces" type="Node2D" parent="."]
+[node name="PieceHolder" type="Node2D" parent="."]
 
-[node name="Knight" parent="Pieces" instance=ExtResource( 10 )]
-position = Vector2( 337, 145 )
+[node name="PieceSpawner" type="Timer" parent="."]
+script = ExtResource( 15 )
+pawnAmount = 8
+knightAmount = 2
+bishopAmount = 2
+rookAmount = 2
+queenAmount = 1
 
-[node name="Pawn" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 336, 192 )
-
-[node name="Pawn2" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 384, 192 )
-
-[node name="Pawn3" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 432, 192 )
-
-[node name="Pawn4" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 480, 192 )
-
-[node name="Pawn5" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 528, 192 )
-
-[node name="Pawn6" parent="Pieces" instance=ExtResource( 9 )]
-position = Vector2( 288, 192 )
-
-[node name="Bishop" parent="Pieces" instance=ExtResource( 11 )]
-position = Vector2( 529, 144 )
-
-[node name="Rook" parent="Pieces" instance=ExtResource( 12 )]
-position = Vector2( 482, 145 )
-
-[node name="Rook2" parent="Pieces" instance=ExtResource( 12 )]
-position = Vector2( 289, 145 )
-
-[node name="Queen" parent="Pieces" instance=ExtResource( 13 )]
-position = Vector2( 434, 145 )
-
-[node name="WhiteKing" parent="Pieces" instance=ExtResource( 14 )]
-position = Vector2( 386, 145 )
+[node name="TurnController" type="Timer" parent="."]
+script = ExtResource( 7 )

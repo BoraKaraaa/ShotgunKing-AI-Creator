@@ -1,6 +1,10 @@
 #include "TurnController.h"
 #include "ChessBoard.h"
 
+#include "PieceSpawner.h"
+
+#include "ChessPiece.h"
+
 #include "Pawn.h"
 #include "Knight.h"
 #include "Bishop.h"
@@ -29,7 +33,11 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<TurnController>();
 	register_class<ChessBoard>();
 
+	register_class<PieceSpawner>();
+
 	// Pieces
+	register_class<ChessPiece>();
+
 	register_class<Pawn>();
 	register_class<Knight>();
 	register_class<Bishop>();

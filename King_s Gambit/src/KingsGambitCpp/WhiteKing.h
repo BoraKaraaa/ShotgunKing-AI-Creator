@@ -1,6 +1,8 @@
 #pragma once
 #include "ChessPiece.h"
 
+#include "ChessBoard.h"
+
 class WhiteKing : public ChessPiece
 {
 	GODOT_CLASS(WhiteKing, ChessPiece);
@@ -11,5 +13,9 @@ public:
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
+
+private:
+	void whiteKingAI();
+	void runAway();
 };
 

@@ -1,6 +1,12 @@
 #pragma once
 #include "ChessPiece.h"
 
+#include <ResourceLoader.hpp>
+#include <PackedScene.hpp>
+
+#include "ChessBoard.h"
+#include "TurnController.h"
+
 
 class Pawn : public ChessPiece
 {
@@ -9,8 +15,17 @@ class Pawn : public ChessPiece
 public:
 	static void _register_methods();
 	void _init();
+	void _ready();
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
+
+private:
+	void pawnAI();
+
+	void spawnQueenToPosition(int, int);
+
+	Ref<PackedScene> queenScene;
+	Node2D* pieceHolder;
 };
 

@@ -1,20 +1,20 @@
 #pragma once
 #include <Godot.hpp>
-#include <Node2d.hpp>
+#include <Timer.hpp>
+
+#include <vector>
+
+#include "TurnType.h"
+#include "ChessPiece.h"
 
 using namespace godot;
 
-enum class TurnType
+class TurnController : public Timer 
 {
-	BLACK = 0,
-	WHITE = 1
-};
-
-class TurnController : public Node2D 
-{
-	GODOT_CLASS(TurnController, Node2D);
+	GODOT_CLASS(TurnController, Timer);
 
 public:
+	static TurnController* turnControllerInstance;
 	static TurnType pTurnType;
 
 	static void _register_methods();
@@ -23,5 +23,28 @@ public:
 	TurnController();
 	~TurnController();
 
+	void startTurn();
+
+	void setWhitePiece(ChessPiece*);
+	void setBlackPiece(ChessPiece*);
+
+	void deleteWhitePiece(ChessPiece*);
+
+	void setCreatedWhitePieces(ChessPiece*);
+
+private:
+	std::vector<ChessPiece*> whitePieces;
+	std::vector<ChessPiece*> createdWhitePieces;
+	std::vector<int> deletedIndexes;
+
+	ChessPiece* blakcPiece;
+
+
+	void blackTurn();
+	void whiteTurn();
+
+	void waitNSecond(float, String);
+
+	void updateWhitePieces();
 };
 

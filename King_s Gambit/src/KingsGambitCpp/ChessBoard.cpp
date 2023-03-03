@@ -1,5 +1,8 @@
 #include "ChessBoard.h"
-#include <string>
+#include <iostream>
+
+// Singleton
+ChessBoard* ChessBoard::chessBoardInstance = NULL;
 
 Vector2 ChessBoard::boardDimensions = Vector2(8, 8);
 
@@ -8,15 +11,16 @@ void ChessBoard::_register_methods()
 	register_method((char*)"_init", &ChessBoard::_init);
 	register_property<ChessBoard, Vector2>((char*)"boardDimensions", &ChessBoard::setBoardDimensions, &ChessBoard::getBoardDimensions, ChessBoard::boardDimensions);
 
-	register_property<ChessBoard, float>((char*)"firstSquareXtransform", &ChessBoard::firstSquareXtransform, 0.);
-	register_property<ChessBoard, float>((char*)"firstSquareYTransform", &ChessBoard::firstSquareYTransform, 0.);
+	register_property<ChessBoard, float>((char*)"firstSquareXtransform", &ChessBoard::firstSquareXtransform, 0.); // 240
+	register_property<ChessBoard, float>((char*)"firstSquareYTransform", &ChessBoard::firstSquareYTransform, 0.); // 167
 
-	register_property<ChessBoard, float>((char*)"twoSquareDistanceDiff", &ChessBoard::twoSquareDistanceDiff, 0.);
+	register_property<ChessBoard, float>((char*)"twoSquareXDistanceDiff", &ChessBoard::twoSquareXDistanceDiff, 0.); // 48
+	register_property<ChessBoard, float>((char*)"twoSquareYDistanceDiff", &ChessBoard::twoSquareYDistanceDiff, 0.); // 47
 }
 
 void ChessBoard::_init()
 {
-
+	chessBoardInstance = this;
 }
 
 ChessBoard::ChessBoard()
@@ -79,9 +83,47 @@ Vector2 ChessBoard::getBoardDimensions()
 
 Square* ChessBoard::getSquare(int x, int y)
 {
+	checkProperDirection(&x, &y);
+
 	return squareArray[x][y];
 }
 
+Vector2 ChessBoard::getSquarePivotPosition(int x, int y)
+{
+	checkProperDirection(&x, &y);
 
+	return Vector2(firstSquareXtransform + twoSquareXDistanceDiff * x, firstSquareYTransform + twoSquareYDistanceDiff * y);
+}
 
+void ChessBoard::setChessPieceToSquare(ChessPiece* chessPiece, int x, int y)
+{
+	checkProperDirection(&x, &y);
+
+	getSquare(x, y)->setPieceToSquare(chessPiece);
+}
+
+bool ChessBoard::isSquareEmpty(int x, int y)
+{
+	checkProperDirection(&x, &y);
+
+	return getSquare(x, y)->isSquareEmpty();
+}
+
+float ChessBoard::twoSquareDistance(int fX, int fY, int sX, int sY)
+{
+	return sqrt((pow(abs(sX - fX), 2) + pow(abs(sY - fY), 2)));
+}
+
+int ChessBoard::twoSquareDistanceWithSquare(int fX, int fY, int sX, int sY)
+{
+	return std::max(abs(fX - sX), abs(fY - sY));
+}
+
+void ChessBoard::checkProperDirection(int* x, int* y)
+{
+	if (*x < 0) *x = 0;
+	if (*x > 7) *x = 7;
+	if (*y < 0) *y = 0;
+	if (*y > 7) *y = 7;
+}
 

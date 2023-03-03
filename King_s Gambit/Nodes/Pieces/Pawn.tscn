@@ -11,10 +11,16 @@ height = 4.0
 scale = Vector2( 3, 3 )
 z_index = 10
 script = ExtResource( 2 )
+TurnCount = 1
+HealthAmount = 1
+moveDuration = 1
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1.66667 )
+position = Vector2( 0, -6.33333 )
 shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

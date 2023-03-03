@@ -1,4 +1,3 @@
-﻿  GodotLib.cpp
-  Pawn.cpp
-  Generating Code...
+﻿  PieceSpawner.cpp
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(169,16): warning C4244: 'argument': conversion from 'int' to 'const real_t', possible loss of data
   KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll

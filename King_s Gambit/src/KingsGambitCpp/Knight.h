@@ -1,5 +1,6 @@
 #pragma once
 #include "ChessPiece.h"
+#include "Square.h"
 
 class Knight : public ChessPiece
 {
@@ -11,5 +12,13 @@ public:
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
+
+private:
+	void knightAI();
+	bool tryToCheckmate();
+	bool tryToCheck();
+
+	Square** freeSquares;
+
 };
 
