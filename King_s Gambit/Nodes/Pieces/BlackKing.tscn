@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites/BlackStones/BlackKing1.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/BlackStones/BlackKing2.png" type="Texture" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://Sprites/BlackStones/BlackKing8.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/WhiteStones/Shotgun.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/BlackKing.gdns" type="Script" id=10]
+[ext_resource path="res://Sprites/Extras/ArrowUp1.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Extras/ArrowUp2.png" type="Texture" id=12]
+[ext_resource path="res://Audios/jump.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audios/hitHurt.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sprites/Extras/Bullet1.png" type="Texture" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -54,80 +59,38 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="GDScript" id=2]
-resource_name = "DirerctionController"
-script/source = "extends AnimatedSprite
-
-
-var current_animation = \"Idle\"
-var a = 0;
-
-
-func _process(delta):
-	
-	current_animation = \"Idle\"
-	
-	#mouse input
-	var mouse = get_local_mouse_position()
-	a = stepify(mouse.angle(), PI/4) / (PI/4)
-	a = wrapi(int(a), 0, 8)
-	
-	animation = current_animation + str(a)
-	
-	pass
-"
-
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 4.66667
 height = 8.66667
 
-[sub_resource type="GDScript" id=3]
-resource_name = "GunRotationController"
-script/source = "extends Sprite
-
-
-var a = 0;
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-
-func _process(delta):
-	
-	var mouse = get_global_mouse_position()
-	
-	var angle = rad2deg(Vector2.RIGHT.angle_to((mouse-get_parent().transform.origin)))
-	
-	if angle < 0:
-		angle += 360
-	
-	look_at(mouse)
-	
-	if angle > 270:
-		z_index = 4
-		flip_v = false
-	elif angle > 180: 
-		z_index = 4
-		flip_v = true
-	elif angle > 90:
-		z_index = 6
-		flip_v = true
-	elif angle > 0:
-		z_index = 6
-		flip_v = false
-		
-	pass
-"
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 0.05
+flag_disable_z = true
+direction = Vector3( 1, -50, 0 )
+spread = 20.0
+gravity = Vector3( 0, 250, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.2
+angular_velocity = 150.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.8
 
 [node name="BlackKing" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
 z_index = 10
 script = ExtResource( 10 )
+heuristicStartingValue = 10
+eachMoveMinusValue = 5
+heuristicDistanceMultiplier = 2
 TurnCount = 1
 HealthAmount = 1
 moveDuration = 1
+takeDamageHeuristicValue = 1
+dieHeuristicValue = 1
 
 [node name="KingSprite" type="Sprite" parent="."]
 position = Vector2( 0.666667, -8 )
@@ -137,7 +100,6 @@ texture = ExtResource( 1 )
 [node name="KingAnimation" type="AnimatedSprite" parent="KingSprite"]
 frames = SubResource( 1 )
 animation = "Idle2"
-script = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8.33333 )
@@ -150,4 +112,38 @@ position = Vector2( 0.333333, -4.33333 )
 z_index = 6
 texture = ExtResource( 9 )
 offset = Vector2( 3.88, 0 )
-script = SubResource( 3 )
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="ArrowHolder" type="Node2D" parent="."]
+
+[node name="StraightArrow" type="Sprite" parent="ArrowHolder"]
+visible = false
+z_index = 10
+texture = ExtResource( 11 )
+
+[node name="CrossArrow" type="Sprite" parent="ArrowHolder"]
+visible = false
+z_index = 10
+texture = ExtResource( 12 )
+
+[node name="AudioHolder" type="Node2D" parent="."]
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="AudioHolder"]
+stream = ExtResource( 13 )
+volume_db = -15.0
+
+[node name="ShotAudio" type="AudioStreamPlayer2D" parent="AudioHolder"]
+stream = ExtResource( 14 )
+volume_db = -15.0
+
+[node name="BulletParticle" type="Particles2D" parent="."]
+visible = false
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 15 )

@@ -1,6 +1,6 @@
 #include "TurnController.h"
 
-TurnController* TurnController::turnControllerInstance;
+TurnController* TurnController::turnControllerInstance = NULL;
 TurnType TurnController::pTurnType = TurnType::BLACK;
 
 void TurnController::_register_methods()
@@ -22,16 +22,21 @@ TurnController::~TurnController() { }
 
 void TurnController::startTurn()
 {
-	/*
 	if(pTurnType == TurnType::BLACK)
 	{
-		waitNSecond(1, "blackTurn");
+		waitNSecond(0.5, "blackTurn");
 	}
 	else
 	{
-		waitNSecond(1, "whiteTurn");
+		waitNSecond(0.5, "whiteTurn");
 	}
-	*/
+}
+
+void TurnController::stopTurn()
+{
+	get_parent()->remove_child(this);
+	//disconnect("timeout", this, "blackTurn");
+	//disconnect("timeout", this, "whiteTurn");
 }
 
 void TurnController::blackTurn()
@@ -41,20 +46,39 @@ void TurnController::blackTurn()
 	Godot::print("Black Turn");
 
 	disconnect("timeout", this, "blackTurn");
-	waitNSecond(1, "whiteTurn");
+	waitNSecond(0.5, "whiteTurn");
 }
 
 void TurnController::whiteTurn()
 {
+	/*
+	if(!isStart)
+	{
+		for (ChessPiece* chessPiece : whitePieces)
+		{
+			chessPiece->changeSquareThreatCount(-1);
+		}
+	}
+	*/
+
 	for(ChessPiece* chessPiece : whitePieces)
 	{
 		chessPiece->takeTurn();
 	}
-	
+
+	/*
+	for (ChessPiece* chessPiece : whitePieces)
+	{
+		chessPiece->changeSquareThreatCount(1);
+	}
+	*/
+
+	//isStart = false;
+
 	Godot::print("White Turn");
 
 	disconnect("timeout", this, "whiteTurn");
-	waitNSecond(1, "blackTurn");
+	waitNSecond(0.5, "blackTurn");
 
 	updateWhitePieces();
 }
@@ -93,12 +117,10 @@ void TurnController::deleteWhitePiece(ChessPiece* whitePiece)
 			return;
 		}
 	}
-	
 }
 
 void TurnController::updateWhitePieces()
 {
-
 	for(ChessPiece* createdPiece : createdWhitePieces)
 	{
 		whitePieces.push_back(createdPiece);

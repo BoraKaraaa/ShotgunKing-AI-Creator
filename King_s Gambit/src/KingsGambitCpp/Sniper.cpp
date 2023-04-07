@@ -10,11 +10,25 @@ Sniper::Sniper(int areaW)
 
 Sniper::~Sniper()
 {
-
+	
 }
 
-bool Sniper::tryToHitPiece(int x, int y)
+void Sniper::searchHittableArea()
 {
-	return areaWidth >= ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare
-	(BlackKing::blackKingInstance->pX, BlackKing::blackKingInstance->pY, x, y);
+	hittablePieces.clear();
+
+	for (ChessPiece* whitePiece : TurnController::turnControllerInstance->whitePieces)
+	{
+		if(areaWidth >= ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare
+			(BlackKing::blackKingInstance->pX, BlackKing::blackKingInstance->pY, whitePiece->pX, whitePiece->pY))
+		{
+			hittablePieces.push_back(whitePiece);
+		}
+	}
+}
+
+void Sniper::createAllPossibleHitNodes()
+{
+	searchHittableArea();
+	__super::createAllPossibleHitNodes();
 }

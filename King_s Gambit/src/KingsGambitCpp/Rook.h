@@ -11,5 +11,19 @@ public:
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
+
+	void changeSquareThreatCount(int) override;
+
+	void die() override;
+
+private:
+	void rookAI();
+
+	bool tryToMoveSquare(int, int, int, int);
+
+	bool tryToCheckmate();
+	bool tryToCheck(int, int);
+	bool narrowBlackKingArea();
+	void runAway();
 };
 

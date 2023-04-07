@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/WhiteStones/Queen.png" type="Texture" id=1]
+[ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Sprites/Extras/Heart1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Extras/KumSaati.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 2 )
+
+[node name="ChessPieceInfoUI" type="Control"]
+margin_left = 601.0
+margin_top = 186.0
+margin_right = 771.0
+margin_bottom = 456.0
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.141176, 0.133333, 0.211765, 1 )
+
+[node name="ChessPieceIcon" type="TextureRect" parent="."]
+margin_left = 64.0
+margin_top = 10.0
+margin_right = 104.0
+margin_bottom = 50.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="HealtAmountText" type="LineEdit" parent="."]
+margin_left = 17.0
+margin_top = 61.0
+margin_right = 157.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+max_length = 1
+placeholder_text = "Healt Amount"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="TurnCountText" type="LineEdit" parent="."]
+margin_left = 17.0
+margin_top = 96.0
+margin_right = 157.0
+margin_bottom = 122.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+max_length = 1
+placeholder_text = "Turn Count"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="BG2" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 133.0
+margin_bottom = -112.0
+color = Color( 0.807843, 0.254902, 0.254902, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -10.0
+margin_top = 135.0
+margin_right = 182.0
+margin_bottom = 151.0
+rect_scale = Vector2( 1, 1.4 )
+custom_fonts/font = SubResource( 2 )
+text = "HEURISTIC PARAMETERS"
+align = 1
+
+[node name="TakeDamageH" type="LineEdit" parent="."]
+margin_left = 18.0
+margin_top = 177.0
+margin_right = 158.0
+margin_bottom = 203.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+max_length = 2
+placeholder_text = "Take Damage h."
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="DieH" type="LineEdit" parent="."]
+margin_left = 18.0
+margin_top = 210.0
+margin_right = 158.0
+margin_bottom = 236.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+max_length = 2
+placeholder_text = "DIE H."
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="HeartIcon" type="TextureRect" parent="."]
+margin_left = -76.0
+margin_top = 9.0
+margin_right = -36.0
+margin_bottom = 49.0
+rect_rotation = -14.5
+rect_scale = Vector2( 4, 4 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="KumSaatiIcon" type="TextureRect" parent="."]
+margin_left = -12.0
+margin_top = 68.0
+margin_right = 28.0
+margin_bottom = 108.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+texture = ExtResource( 4 )
+stretch_mode = 4

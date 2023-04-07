@@ -17,6 +17,8 @@ public:
 	static TurnController* turnControllerInstance;
 	static TurnType pTurnType;
 
+	std::vector<ChessPiece*> whitePieces;
+
 	static void _register_methods();
 	void _init();
 
@@ -24,6 +26,7 @@ public:
 	~TurnController();
 
 	void startTurn();
+	void stopTurn();
 
 	void setWhitePiece(ChessPiece*);
 	void setBlackPiece(ChessPiece*);
@@ -33,9 +36,10 @@ public:
 	void setCreatedWhitePieces(ChessPiece*);
 
 private:
-	std::vector<ChessPiece*> whitePieces;
 	std::vector<ChessPiece*> createdWhitePieces;
 	std::vector<int> deletedIndexes;
+
+	bool isStart = true;
 
 	ChessPiece* blakcPiece;
 

@@ -13,12 +13,18 @@ public:
 	void takeTurn() override;
 	void moveTo(int, int) override;
 
+	void changeSquareThreatCount(int) override;
+
+	void die() override;
+
 private:
 	void knightAI();
-	bool tryToCheckmate();
-	bool tryToCheck();
+	bool tryToMoveSquare(int, int, int, int);
 
-	Square** freeSquares;
+	bool tryToCheckmate();
+	bool tryToCheck(int, int);
+
+	bool narrowBlackKingArea();
 
 };
 

@@ -6,6 +6,7 @@ class Square
 {
 public:
 	ChessPiece* currChessPiece;
+	int threatCount;
 
 	Square(int, int);
 	~Square();
@@ -28,7 +29,6 @@ private:
 	int x;
 	int y;
 
-	int threatCount;
 	bool isEmpty;
 
 };

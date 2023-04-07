@@ -1,3 +1,16 @@
 ﻿  PieceSpawner.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(169,16): warning C4244: 'argument': conversion from 'int' to 'const real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(342,16): warning C4244: 'argument': conversion from 'int' to 'const real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(457,17): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(463,24): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(477,56): warning C4244: '=': conversion from 'int64_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(498,17): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(514,30): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(520,32): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(526,32): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(532,30): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(538,31): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
   KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll

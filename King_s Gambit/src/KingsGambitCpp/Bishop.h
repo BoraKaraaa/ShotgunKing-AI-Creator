@@ -13,6 +13,11 @@ public:
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
+
+	void changeSquareThreatCount(int) override;
+
+	void die() override;
+
 private:
 	void bishopAI();
 	bool tryToCheckmate();

@@ -34,8 +34,12 @@ public:
 
 	bool isSquareEmpty(int, int);
 
+	void clearBoardThreatCount();
+
 	float twoSquareDistance(int, int, int, int);
 	int twoSquareDistanceWithSquare(int, int, int, int);
+
+	bool isSquareValid(int, int);
 
 
 private:

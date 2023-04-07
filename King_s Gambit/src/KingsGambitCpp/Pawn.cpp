@@ -34,20 +34,34 @@ void Pawn::moveTo(int x, int y)
 	__super::moveTo(x, y);
 }
 
+void Pawn::changeSquareThreatCount(int mod)
+{
+	if(ChessBoard::chessBoardInstance->isSquareValid(pX-1, pY+1))
+	{
+		ChessBoard::chessBoardInstance->getSquare(pX - 1, pY + 1)->threatCount += mod;
+	}
+	
+	if(ChessBoard::chessBoardInstance->isSquareValid(pX+1, pY+1))
+	{
+		ChessBoard::chessBoardInstance->getSquare(pX + 1, pY + 1)->threatCount += mod;
+	}
+	
+}
+
 void Pawn::pawnAI()
 {
 	// First Check for killing BlackKing
 	if( BlackKing::blackKingInstance->pX == pX - 1  && BlackKing::blackKingInstance->pY == pY + 1 )
 	{
-		Godot::print("GAME OVER");
 		moveTo(pX - 1, pY + 1);
+		BlackKing::blackKingInstance->die();
 		return;
 	}
 
 	if( BlackKing::blackKingInstance->pX == pX + 1 && BlackKing::blackKingInstance->pY == pY + 1 )
 	{
-		Godot::print("GAME OVER");
 		moveTo(pX + 1, pY + 1);
+		BlackKing::blackKingInstance->die();
 		return;
 	}
 
@@ -65,7 +79,13 @@ void Pawn::pawnAI()
 	if(pY == 7)
 	{
 		spawnQueenToPosition(pX, pY);
-		die();
+		
+		// destroy the pawn
+		TurnController::turnControllerInstance->deleteWhitePiece(this);
+
+		isDied = true;
+		set_visible(false);
+		//get_parent()->remove_child(this);
 	}
 
 }
@@ -79,4 +99,10 @@ void Pawn::spawnQueenToPosition(int x, int y)
 	pieceHolder->add_child(queenBody);
 
 	TurnController::turnControllerInstance->setCreatedWhitePieces(queenSC);
+}
+
+void Pawn::die()
+{
+	changeSquareThreatCount(-1);
+	__super::die();
 }

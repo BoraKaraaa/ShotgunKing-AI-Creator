@@ -1,0 +1,136 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://GDscripts/ChessPieceList.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/BlackStones/BlackKing1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/WhiteStones/King.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/WhiteStones/Queen.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/WhiteStones/Pawn.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/WhiteStones/Knight.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/WhiteStones/Bishop.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/WhiteStones/Rook.png" type="Texture" id=8]
+[ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 9 )
+
+[sub_resource type="Theme" id=1]
+default_font = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 4.0
+content_margin_top = 4.0
+bg_color = Color( 0.141176, 0.133333, 0.211765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.827451, 0.760784, 0.643137, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="PreGameUI" type="Control"]
+margin_left = 80.0
+margin_top = 147.0
+margin_right = 250.0
+margin_bottom = 407.0
+theme = SubResource( 1 )
+
+[node name="ChessPieceList" type="ItemList" parent="."]
+margin_left = -1.0
+margin_right = 99.0
+margin_bottom = 152.0
+rect_scale = Vector2( 1.7, 1.7 )
+custom_styles/bg = SubResource( 3 )
+items = [ "P", ExtResource( 5 ), false, "K", ExtResource( 6 ), false, "B", ExtResource( 7 ), false, "R", ExtResource( 8 ), false, "Q", ExtResource( 4 ), false, "W", ExtResource( 3 ), false, "B", ExtResource( 2 ), false ]
+script = ExtResource( 1 )
+
+[node name="PawnAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 11.0
+margin_right = 129.0
+margin_bottom = 33.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+placeholder_text = "PAWN"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="KnightAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 46.0
+margin_right = 129.0
+margin_bottom = 68.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+placeholder_text = "KNIGHT"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="BishopAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 79.0
+margin_right = 129.0
+margin_bottom = 101.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+placeholder_text = "BISHOP"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="RookAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 114.0
+margin_right = 129.0
+margin_bottom = 136.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+placeholder_text = "ROOK"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="QueenAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 147.0
+margin_right = 129.0
+margin_bottom = 169.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+placeholder_text = "QUEEN"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="WhiteKingAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 183.0
+margin_right = 129.0
+margin_bottom = 205.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+editable = false
+placeholder_text = "WHITE KING"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[node name="BlackKingAmount" type="LineEdit" parent="."]
+margin_left = 39.0
+margin_top = 218.0
+margin_right = 129.0
+margin_bottom = 240.0
+rect_scale = Vector2( 1.2, 1 )
+align = 1
+max_length = 1
+editable = false
+placeholder_text = "BLACK KING"
+placeholder_alpha = 1.0
+caret_blink = true
+
+[connection signal="item_selected" from="ChessPieceList" to="ChessPieceList" method="_on_ChessPieceList_item_selected"]

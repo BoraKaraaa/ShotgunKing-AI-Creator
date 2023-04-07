@@ -2,6 +2,8 @@
 
 #include "BlackKing.h"
 
+WhiteKing* WhiteKing::whiteKingInstance = NULL;
+
 void WhiteKing::_register_methods()
 {
 	register_method((char*)"_init", &WhiteKing::_init);
@@ -9,7 +11,7 @@ void WhiteKing::_register_methods()
 
 void WhiteKing::_init()
 {
-
+	whiteKingInstance = this;
 }
 
 void WhiteKing::takeTurn()
@@ -24,6 +26,28 @@ void WhiteKing::takeTurn()
 void WhiteKing::moveTo(int x, int y)
 {
 	__super::moveTo(x, y);
+}
+
+void WhiteKing::changeSquareThreatCount(int mod)
+{
+	if(ChessBoard::chessBoardInstance->isSquareValid(pX+1, pY+1)) 
+		ChessBoard::chessBoardInstance->getSquare(pX + 1, pY + 1)->threatCount += mod;
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX + 1, pY - 1))
+		ChessBoard::chessBoardInstance->getSquare(pX + 1, pY - 1)->threatCount += mod;
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX - 1, pY - 1))
+		ChessBoard::chessBoardInstance->getSquare(pX - 1, pY - 1)->threatCount += mod;
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX - 1, pY + 1))
+		ChessBoard::chessBoardInstance->getSquare(pX - 1, pY + 1)->threatCount += mod;
+
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX, pY + 1))
+		ChessBoard::chessBoardInstance->getSquare(pX, pY + 1)->threatCount += mod;
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX, pY - 1))
+		ChessBoard::chessBoardInstance->getSquare(pX, pY - 1)->threatCount += mod;
+
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX + 1, pY))
+		ChessBoard::chessBoardInstance->getSquare(pX + 1, pY)->threatCount += mod;
+	if (ChessBoard::chessBoardInstance->isSquareValid(pX - 1, pY))
+		ChessBoard::chessBoardInstance->getSquare(pX - 1, pY)->threatCount += mod;
 }
 
 void WhiteKing::whiteKingAI()
@@ -145,4 +169,14 @@ void WhiteKing::runAway()
 		moveTo(x4, y4);
 	}
 
+}
+
+void WhiteKing::die()
+{
+	Godot::print("YOU WIN THE GAME");
+
+	TurnController::turnControllerInstance->stopTurn();
+
+	//changeSquareThreatCount(-1);
+	__super::die();
 }

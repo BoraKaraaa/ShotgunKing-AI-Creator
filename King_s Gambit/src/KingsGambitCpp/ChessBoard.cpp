@@ -109,6 +109,17 @@ bool ChessBoard::isSquareEmpty(int x, int y)
 	return getSquare(x, y)->isSquareEmpty();
 }
 
+void ChessBoard::clearBoardThreatCount()
+{
+	for (int i = 0; i < boardDimensions.x; i++)
+	{
+		for (int j = 0; j < boardDimensions.y; j++)
+		{
+			getSquare(i, j)->threatCount = 0;
+		}
+	}
+}
+
 float ChessBoard::twoSquareDistance(int fX, int fY, int sX, int sY)
 {
 	return sqrt((pow(abs(sX - fX), 2) + pow(abs(sY - fY), 2)));
@@ -117,6 +128,12 @@ float ChessBoard::twoSquareDistance(int fX, int fY, int sX, int sY)
 int ChessBoard::twoSquareDistanceWithSquare(int fX, int fY, int sX, int sY)
 {
 	return std::max(abs(fX - sX), abs(fY - sY));
+}
+
+bool ChessBoard::isSquareValid(int x, int y)
+{
+	if (x < 0 || x > 7 || y < 0 || y > 7) return false;
+	return true;
 }
 
 void ChessBoard::checkProperDirection(int* x, int* y)

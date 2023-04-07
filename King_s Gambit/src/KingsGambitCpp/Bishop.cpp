@@ -28,6 +28,70 @@ void Bishop::moveTo(int x, int y)
 	__super::moveTo(x,y);
 }
 
+void Bishop::changeSquareThreatCount(int mod)
+{
+	int startX, startY;
+	int operation = 1;
+
+	for (startX = pX + operation, startY = pY + operation; startX < 8 && startY < 8; startX += operation, startY += operation)
+	{
+		if (!ChessBoard::chessBoardInstance->isSquareEmpty(startX, startY))
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+			break;
+		}
+		else
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+		}
+	}
+
+	operation = -1;
+
+	for (startX = pX + operation, startY = pY + operation; startX >= 0 && startY >= 0; startX += operation, startY += operation)
+	{
+		if (!ChessBoard::chessBoardInstance->isSquareEmpty(startX, startY))
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+			break;
+		}
+		else
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+		}
+	}
+
+	operation = 1;
+
+	for (startX = pX + operation, startY = pY - operation; startX < 8 && startY >= 0; startX += operation, startY -= operation)
+	{
+		if (!ChessBoard::chessBoardInstance->isSquareEmpty(startX, startY))
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+			break;
+		}
+		else
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+		}
+	}
+
+	operation = -1;
+
+	for (startX = pX + operation, startY = pY - operation; startX >= 0 && startY < 8; startX += operation, startY -= operation)
+	{
+		if (!ChessBoard::chessBoardInstance->isSquareEmpty(startX, startY))
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+			break;
+		}
+		else
+		{
+			ChessBoard::chessBoardInstance->getSquare(startX, startY)->threatCount += mod;
+		}
+	}
+}
+
 void Bishop::bishopAI()
 {
 	// First Check Diagonals for Killing BlackKing
@@ -99,6 +163,7 @@ bool Bishop::tryToCheckmate()
 			if (s->currChessPiece == BlackKing::blackKingInstance)
 			{
 				moveTo(x, y);
+				BlackKing::blackKingInstance->die();
 				return true;
 			}
 			else
@@ -278,16 +343,12 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 
 	int minDiff = 0;
 
-	//Godot::print(String::num_int64(xDiff));
-	//Godot::print(String::num_int64(yDiff));
-
 	if(xDiff > 0)
 	{
 		// Right Area 
 
 		if(abs(xDiff) > abs(yDiff))
 		{
-			//Godot::print("RIGHT");
 			minDiff = (abs(xDiff) - abs(yDiff)) / 2;
 
 			if(yDiff > 0)
@@ -344,7 +405,6 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 
 		if(abs(xDiff) > abs(yDiff))
 		{
-			//Godot::print("LEFT");
 			minDiff = (abs(xDiff) - abs(yDiff)) / 2;
 
 			if (yDiff > 0)
@@ -374,10 +434,6 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 			}
 			else
 			{
-				//Godot::print("LEFT-UP");
-				//Godot::print(String::num_int64(pX + minDiff));
-				//Godot::print(String::num_int64(pY + minDiff));
-
 				if (isDiagonalFree(pX, pY, pX + minDiff, pY - minDiff))
 				{
 					if (isDiagonalFree(pX + minDiff, pY - minDiff, targetX -1, targetY -1))
@@ -461,18 +517,13 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 	else if(yDiff < 0)
 	{
 		// Up Area
-		//Godot::print("UP");
 
 		if (abs(yDiff) > abs(xDiff))
 		{
-			//Godot::print("UP2");
 			minDiff = (abs(yDiff) - abs(xDiff)) / 2;
 
 			if (xDiff > 0)
 			{
-				//Godot::print(String::num_int64(pX + minDiff));
-				//Godot::print(String::num_int64(pY + minDiff));
-
 				if (isDiagonalFree(pX, pY, pX + minDiff, pY + minDiff))
 				{
 					if (isDiagonalFree(pX + minDiff, pY + minDiff, targetX+1, targetY-1))
@@ -496,10 +547,6 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 			}
 			else
 			{
-				//Godot::print("LeftSide");
-				//Godot::print(String::num_int64(pX - minDiff));
-				//Godot::print(String::num_int64(pY + minDiff));
-
 				if (isDiagonalFree(pX, pY, pX - minDiff, pY + minDiff))
 				{
 					if (isDiagonalFree(pX - minDiff, pY + minDiff, targetX -1, targetY-1))
@@ -524,5 +571,10 @@ bool Bishop::checkDiagonalsForCheck(int targetX, int targetY)
 		}
 	}
 
+}
 
+void Bishop::die()
+{
+	changeSquareThreatCount(-1);
+	__super::die();
 }

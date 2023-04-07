@@ -69,6 +69,12 @@
     <ClInclude Include="GunType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChessPieceColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp">
@@ -117,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sniper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

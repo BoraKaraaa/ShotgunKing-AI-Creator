@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Nodes/ChessBoard.tscn" type="PackedScene" id=2]
@@ -7,8 +7,26 @@
 [ext_resource path="res://Sprites/Extras/Bullet1.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Extras/Bullet2.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/TurnController.gdns" type="Script" id=7]
-[ext_resource path="res://Scripts/Test.gdns" type="Script" id=8]
+[ext_resource path="res://Sprites/Extras/targetIcon.png" type="Texture" id=8]
+[ext_resource path="res://Nodes/GameController.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/CameraNoise.gdns" type="Script" id=10]
+[ext_resource path="res://Nodes/PreGameUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sprites/Extras/PlayButton2.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Extras/PlayButton1.png" type="Texture" id=13]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/KnightInfoUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Nodes/PieceSpawner.gdns" type="Script" id=15]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/PawnInfoUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/BishopInfoUI.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/RookInfoUI.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/QueenInfoUI.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/WhiteKingInfoUI.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Nodes/ChessPieceInfoUI/BlackKingInfoUI.tscn" type="PackedScene" id=21]
+[ext_resource path="res://GDscripts/ChessPieceInfoUI.gd" type="Script" id=22]
+[ext_resource path="res://GDscripts/PlayButton.gd" type="Script" id=23]
+[ext_resource path="res://GDscripts/RestartButton.gd" type="Script" id=24]
+[ext_resource path="res://Audios/pressButton.wav" type="AudioStream" id=25]
+[ext_resource path="res://Audios/pickupCoin (3).wav" type="AudioStream" id=26]
+[ext_resource path="res://TextFont/bescii.ttf" type="DynamicFontData" id=27]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -51,23 +69,37 @@ shader_param/scan_line_count = 120.0
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 18
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 12
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 11
+font_data = ExtResource( 27 )
+
 [node name="MainScene" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 material = SubResource( 3 )
-margin_left = -1.99988
-margin_top = 2.0
-margin_right = 62.0001
-margin_bottom = 66.0
-rect_scale = Vector2( 12.5, 9.4 )
+margin_left = -391.0
+margin_top = -362.0
+margin_right = -327.0
+margin_bottom = -298.0
+rect_scale = Vector2( 25, 18.8 )
+mouse_filter = 2
 texture = ExtResource( 4 )
 
 [node name="ChessBoard" parent="." instance=ExtResource( 2 )]
 process_priority = 10
 position = Vector2( 217, 125 )
 z_index = 10
+tile_data = PoolIntArray( 0, 0, 0, 1, 2, 0, 2, 0, 0, 3, 2, 0, 4, 0, 0, 5, 2, 0, 6, 0, 0, 7, 2, 0, 65536, 2, 0, 65537, 0, 0, 65538, 2, 0, 65539, 0, 0, 65540, 2, 0, 65541, 0, 0, 65542, 2, 0, 65543, 0, 0, 131072, 0, 0, 131073, 2, 0, 131074, 0, 0, 131075, 2, 0, 131076, 0, 0, 131077, 2, 0, 131078, 0, 0, 131079, 2, 0, 196608, 2, 0, 196609, 0, 0, 196610, 2, 0, 196611, 0, 0, 196612, 2, 0, 196613, 0, 0, 196614, 2, 0, 196615, 0, 0, 262144, 0, 0, 262145, 2, 0, 262146, 0, 0, 262147, 2, 0, 262148, 0, 0, 262149, 2, 0, 262150, 0, 0, 262151, 2, 0, 327680, 2, 0, 327681, 0, 0, 327682, 2, 0, 327683, 0, 0, 327684, 2, 0, 327685, 0, 0, 327686, 2, 0, 327687, 0, 0, 393216, 0, 0, 393217, 2, 0, 393218, 0, 0, 393219, 2, 0, 393220, 0, 0, 393221, 2, 0, 393222, 0, 0, 393223, 2, 0, 458752, 3, 0, 458753, 1, 0, 458754, 3, 0, 458755, 1, 0, 458756, 3, 0, 458757, 1, 0, 458758, 3, 0, 458759, 1, 0 )
 firstSquareXtransform = 240.0
 firstSquareYTransform = 167.0
 twoSquareXDistanceDiff = 48.0
@@ -79,28 +111,29 @@ margin_top = -405.0
 margin_right = -455.0
 margin_bottom = -365.0
 rect_scale = Vector2( 46.5121, 38.1331 )
+mouse_filter = 2
 color = Color( 0.027451, 0.0431373, 0.0862745, 1 )
 
 [node name="GameUI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_scale = Vector2( 20.0604, 14.9227 )
 
 [node name="MoveCount" type="Label" parent="GameUI"]
-margin_left = 12.7615
-margin_top = 36.3206
-margin_right = 116.761
-margin_bottom = 52.3206
+margin_left = 13.5591
+margin_top = 35.9854
+margin_right = 117.559
+margin_bottom = 51.9854
 rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 1 )
 text = "Move Count "
 align = 1
 
 [node name="MoveCountAmount" type="Label" parent="GameUI"]
-margin_left = 19.7404
-margin_top = 36.3206
-margin_right = 118.74
-margin_bottom = 52.3206
+margin_left = 20.5379
+margin_top = 35.9854
+margin_right = 119.538
+margin_bottom = 51.9854
 rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 1 )
 text = "0"
@@ -109,36 +142,42 @@ align = 1
 [node name="Gun&Bullet" type="Node2D" parent="."]
 
 [node name="GunUi" type="Sprite" parent="Gun&Bullet"]
-position = Vector2( 288, 59 )
+position = Vector2( 408, 83 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 3 )
 
 [node name="CurrBulletH" type="Sprite" parent="Gun&Bullet"]
+visible = false
 position = Vector2( 230, 56 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 6 )
 
 [node name="Bullet1H" type="Sprite" parent="Gun&Bullet"]
+visible = false
 position = Vector2( 230, 87 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 6 )
 
 [node name="Bullet2H" type="Sprite" parent="Gun&Bullet"]
+visible = false
 position = Vector2( 245, 87 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 6 )
 
 [node name="Bullet3H" type="Sprite" parent="Gun&Bullet"]
+visible = false
 position = Vector2( 260, 87 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 6 )
 
 [node name="CurrBullet" type="Sprite" parent="Gun&Bullet"]
+visible = false
 position = Vector2( 230, 56 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 5 )
 
 [node name="BulletHolder" type="Node2D" parent="Gun&Bullet"]
+visible = false
 
 [node name="Bullet1" type="Sprite" parent="Gun&Bullet/BulletHolder"]
 position = Vector2( 230, 87 )
@@ -155,19 +194,157 @@ position = Vector2( 260, 87 )
 scale = Vector2( 4.01208, 2.98454 )
 texture = ExtResource( 5 )
 
-[node name="Test" type="Node2D" parent="."]
-position = Vector2( 289, 167 )
-script = ExtResource( 8 )
-
 [node name="PieceHolder" type="Node2D" parent="."]
 
 [node name="PieceSpawner" type="Timer" parent="."]
 script = ExtResource( 15 )
-pawnAmount = 8
-knightAmount = 2
-bishopAmount = 2
-rookAmount = 2
-queenAmount = 1
 
 [node name="TurnController" type="Timer" parent="."]
 script = ExtResource( 7 )
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 400, 300 )
+current = true
+script = ExtResource( 10 )
+
+[node name="Tween" type="Tween" parent="Camera2D"]
+
+[node name="Timer" type="Timer" parent="Camera2D"]
+
+[node name="targetIcon" type="Sprite" parent="."]
+position = Vector2( -60, -46 )
+scale = Vector2( 2, 2 )
+z_index = 10
+texture = ExtResource( 8 )
+
+[node name="PreGameUI" parent="." instance=ExtResource( 11 )]
+margin_left = 30.0
+margin_top = 142.0
+margin_right = 200.0
+margin_bottom = 412.0
+
+[node name="PlayButton" type="TextureButton" parent="."]
+margin_left = 38.0
+margin_top = 422.0
+margin_right = 188.0
+margin_bottom = 477.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+expand = true
+script = ExtResource( 23 )
+
+[node name="Label" type="Label" parent="PlayButton"]
+margin_left = 53.0
+margin_top = 19.0
+margin_right = 97.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 4 )
+text = "PLAY"
+align = 1
+
+[node name="pressAudio" type="AudioStreamPlayer2D" parent="PlayButton"]
+stream = ExtResource( 26 )
+volume_db = -10.0
+
+[node name="RestartButton" type="TextureButton" parent="."]
+margin_left = 38.0
+margin_top = 459.676
+margin_right = 188.0
+margin_bottom = 514.676
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+expand = true
+script = ExtResource( 24 )
+
+[node name="Label" type="Label" parent="RestartButton"]
+margin_left = 37.787
+margin_top = 19.0
+margin_right = 114.787
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 4 )
+text = "Restart"
+align = 1
+
+[node name="pressAudio" type="AudioStreamPlayer2D" parent="RestartButton"]
+stream = ExtResource( 25 )
+volume_db = -10.0
+
+[node name="ChessPieceInfoUIHolder" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 22 )
+
+[node name="PawnInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 16 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="KnightInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 14 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="BishopInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 17 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="RookInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 18 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="QueenInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 19 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="WhiteKingInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 20 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="BlackKingInfoUI" parent="ChessPieceInfoUIHolder" instance=ExtResource( 21 )]
+margin_left = 615.0
+margin_top = 140.0
+margin_right = 785.0
+margin_bottom = 410.0
+
+[node name="PrepHeuristicValueButton" type="CheckButton" parent="."]
+margin_left = 620.0
+margin_top = 97.0
+margin_right = 782.0
+margin_bottom = 137.0
+custom_fonts/font = SubResource( 5 )
+text = "Prep. H. VAL."
+align = 1
+
+[node name="FenNotationText" type="TextEdit" parent="."]
+margin_left = 615.0
+margin_top = 419.0
+margin_right = 785.0
+margin_bottom = 519.0
+custom_fonts/font = SubResource( 6 )
+text = "
+you can write:
+'FEN NOTATION'
+    here!!!"
+syntax_highlighting = true
+bookmark_gutter = true
+drag_and_drop_selection_enabled = false
+smooth_scrolling = true
+wrap_enabled = true
+caret_blink = true
+
+[connection signal="pressed" from="RestartButton" to="RestartButton" method="_on_RestartButton_pressed"]

@@ -161,8 +161,10 @@
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="BlackKing.h" />
+    <ClInclude Include="CameraNoise.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChessPiece.h" />
+    <ClInclude Include="ChessPieceColor.h" />
     <ClInclude Include="ChessPieceType.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="GunType.h" />
@@ -181,6 +183,7 @@
   <ItemGroup>
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="BlackKing.cpp" />
+    <ClCompile Include="CameraNoise.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
     <ClCompile Include="GodotLib.cpp" />

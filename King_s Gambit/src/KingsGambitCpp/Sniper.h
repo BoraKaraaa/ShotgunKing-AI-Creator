@@ -8,7 +8,8 @@ public:
 	Sniper(int);
 	~Sniper();
 
-	bool tryToHitPiece(int, int) override;
+	void searchHittableArea() override;
+	void createAllPossibleHitNodes() override;
 
 private:
 	int areaWidth;
