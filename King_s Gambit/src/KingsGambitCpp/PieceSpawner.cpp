@@ -9,6 +9,8 @@
 
 #include "BlackKing.h"
 
+#include "CountDown.h"
+
 #include <iostream>
 
 PieceSpawner* PieceSpawner::pieceSpawnerInstance = NULL;
@@ -59,6 +61,8 @@ void PieceSpawner::_ready()
 
 	usePrepHeuriscticValButton = (CheckButton*)get_node("/root/MainScene/PrepHeuristicValueButton");
 
+	countDown = (Label*)get_node("/root/MainScene/CountDown");
+
 	playButton->connect("pressed", this, "startGame");
 }
 
@@ -92,6 +96,8 @@ void PieceSpawner::spawnPieces()
 {
 	queue_free();
 
+	setChessPieceParametersToArray();
+
 	int firstRowIndex = 0;
 	int secondRowIndex = 1;
 
@@ -101,7 +107,6 @@ void PieceSpawner::spawnPieces()
 	int index = 1;
 	int indexPawn = 0;
 
-	setChessPieceParametersToArray();
 
 	// WhiteKing Amount always == 1
 	for(int i = 0; i < 1; i++)
@@ -165,6 +170,9 @@ void PieceSpawner::spawnPieces()
 		spawnBlackKingToPosition(3, 7);
 	}
 
+	CountDown::countDownInstance->set_visible(true);
+	CountDown::countDownInstance->startCountDown();
+
 	TurnController::turnControllerInstance->startTurn();
 	disconnect("timeout", this, "spawnPieces");
 }
@@ -172,6 +180,8 @@ void PieceSpawner::spawnPieces()
 void PieceSpawner::setChessPieceAmountsWithFenNotation()
 {
 	queue_free();
+
+	setChessPieceParametersToArray();
 
 	int rowIndex = 7; 
 	int columnIndex = 7;
@@ -218,6 +228,9 @@ void PieceSpawner::setChessPieceAmountsWithFenNotation()
 		}
 	}
 
+	CountDown::countDownInstance->set_visible(true);
+	CountDown::countDownInstance->startCountDown();
+
 	TurnController::turnControllerInstance->startTurn();
 	disconnect("timeout", this, "setChessPieceAmountsWithFenNotation");
 }
@@ -229,11 +242,8 @@ void PieceSpawner::spawnQueenToPosition(int x, int y)
 	queenSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(queenBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		queenSC->setParameters(chessPieceParameters[4][0], chessPieceParameters[4][1],
-			chessPieceParameters[4][2], chessPieceParameters[4][3]);
-	}
+	queenSC->setParameters(chessPieceParameters[4][0], chessPieceParameters[4][1],
+		chessPieceParameters[4][2], chessPieceParameters[4][3]);
 
 	TurnController::turnControllerInstance->setWhitePiece(queenSC);
 }
@@ -245,11 +255,8 @@ void PieceSpawner::spawnBlackKingToPosition(int x, int y)
 	blackKingSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(blackKingBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		((BlackKing*)blackKingSC)->setBlackKingParameters(chessPieceParameters[6][0], chessPieceParameters[6][1],
-			chessPieceParameters[6][2]);
-	}
+	((BlackKing*)blackKingSC)->setBlackKingParameters(chessPieceParameters[6][0], chessPieceParameters[6][1],
+		chessPieceParameters[6][2]);
 
 	TurnController::turnControllerInstance->setBlackPiece(blackKingSC);
 }
@@ -261,12 +268,9 @@ void PieceSpawner::spawnWhiteKingPosition(int x, int y)
 	kingSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(kingBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		kingSC->setParameters(chessPieceParameters[5][0], chessPieceParameters[5][1],
-			chessPieceParameters[5][2], chessPieceParameters[5][3]);
-	}
-
+	kingSC->setParameters(chessPieceParameters[5][0], chessPieceParameters[5][1],
+		chessPieceParameters[5][2], chessPieceParameters[5][3]);
+	
 	TurnController::turnControllerInstance->setWhitePiece(kingSC);
 }
 
@@ -277,11 +281,8 @@ void PieceSpawner::spawnRookToPosition(int x, int y)
 	rookSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(rookBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		rookSC->setParameters(chessPieceParameters[3][0], chessPieceParameters[3][1],
-			chessPieceParameters[3][2], chessPieceParameters[3][3]);
-	}
+	rookSC->setParameters(chessPieceParameters[3][0], chessPieceParameters[3][1],
+		chessPieceParameters[3][2], chessPieceParameters[3][3]);
 
 	TurnController::turnControllerInstance->setWhitePiece(rookSC);
 }
@@ -293,11 +294,8 @@ void PieceSpawner::spawnBishopToPosition(int x, int y)
 	bishopSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(bishopBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		bishopSC->setParameters(chessPieceParameters[2][0], chessPieceParameters[2][1],
-			chessPieceParameters[2][2], chessPieceParameters[2][3]);
-	}
+	bishopSC->setParameters(chessPieceParameters[2][0], chessPieceParameters[2][1],
+		chessPieceParameters[2][2], chessPieceParameters[2][3]);
 
 	TurnController::turnControllerInstance->setWhitePiece(bishopSC);
 }
@@ -309,11 +307,8 @@ void PieceSpawner::spawnKnightToPosition(int x, int y)
 	knightSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(knightBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		knightSC->setParameters(chessPieceParameters[1][0], chessPieceParameters[1][1],
-			chessPieceParameters[1][2], chessPieceParameters[1][3]);
-	}
+	knightSC->setParameters(chessPieceParameters[1][0], chessPieceParameters[1][1],
+		chessPieceParameters[1][2], chessPieceParameters[1][3]);
 
 	TurnController::turnControllerInstance->setWhitePiece(knightSC);
 }
@@ -325,16 +320,11 @@ void PieceSpawner::spawnPawnToPosition(int x, int y)
 	pawnSC->assignInitialDirections(x, y);
 	pieceHolder->add_child(pawnBody);
 
-	if (!usePrepHeuriscticValButton->is_pressed())
-	{
-		pawnSC->setParameters(chessPieceParameters[0][0], chessPieceParameters[0][1],
-			chessPieceParameters[0][2], chessPieceParameters[0][3]);
-	}
+	pawnSC->setParameters(chessPieceParameters[0][0], chessPieceParameters[0][1],
+		chessPieceParameters[0][2], chessPieceParameters[0][3]);
 
 	TurnController::turnControllerInstance->setWhitePiece(pawnSC);
 }
-
-
 
 
 void PieceSpawner::waitNSecond(int second, String callbackFunc)
@@ -349,93 +339,27 @@ void PieceSpawner::spawnChessPieceWhitType(ChessPiece* chessPiece, int x, int y)
 {
 	if(dynamic_cast<Pawn*>(chessPiece))
 	{
-		KinematicBody2D* pawnBody = (KinematicBody2D*)pawnScene->instance();
-		ChessPiece* pawnSC = Object::cast_to<ChessPiece>(pawnBody);
-		pawnSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(pawnBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			pawnSC->setParameters(chessPieceParameters[0][0], chessPieceParameters[0][1],
-				chessPieceParameters[0][2], chessPieceParameters[0][3]);
-		}
-
-		chessPiece = pawnSC;
+		spawnPawnToPosition(x, y);
 	}
 	else if(dynamic_cast<Knight*>(chessPiece))
 	{
-		KinematicBody2D* knightBody = (KinematicBody2D*)knightScene->instance();
-		ChessPiece* knightSC = Object::cast_to<ChessPiece>(knightBody);
-		knightSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(knightBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			knightSC->setParameters(chessPieceParameters[1][0], chessPieceParameters[1][1],
-				chessPieceParameters[1][2], chessPieceParameters[1][3]);
-		}
-
-		chessPiece = knightSC;
+		spawnKnightToPosition(x, y);
 	}
 	else if (dynamic_cast<Bishop*>(chessPiece))
 	{
-		KinematicBody2D* bishopBody = (KinematicBody2D*)bishopScene->instance();
-		ChessPiece* bishopSC = Object::cast_to<ChessPiece>(bishopBody);
-		bishopSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(bishopBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			bishopSC->setParameters(chessPieceParameters[2][0], chessPieceParameters[2][1],
-				chessPieceParameters[2][2], chessPieceParameters[2][3]);
-		}
-
-		chessPiece = bishopSC;
+		spawnBishopToPosition(x, y);
 	}
 	else if (dynamic_cast<Rook*>(chessPiece))
 	{
-		KinematicBody2D* rookBody = (KinematicBody2D*)rookScene->instance();
-		ChessPiece* rookSC = Object::cast_to<ChessPiece>(rookBody);
-		rookSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(rookBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			rookSC->setParameters(chessPieceParameters[3][0], chessPieceParameters[3][1],
-				chessPieceParameters[3][2], chessPieceParameters[3][3]);
-		}
-
-		chessPiece = rookSC;
+		spawnRookToPosition(x, y);
 	}
 	else if (dynamic_cast<Queen*>(chessPiece))
 	{
-		KinematicBody2D* queenBody = (KinematicBody2D*)queenScene->instance();
-		ChessPiece* queenSC = Object::cast_to<ChessPiece>(queenBody);
-		queenSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(queenBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			queenSC->setParameters(chessPieceParameters[4][0], chessPieceParameters[4][1],
-				chessPieceParameters[4][2], chessPieceParameters[4][3]);
-		}
-
-		chessPiece = queenSC;
+		spawnQueenToPosition(x, y);
 	}
 	else if (dynamic_cast<WhiteKing*>(chessPiece))
 	{
-		KinematicBody2D* kingBody = (KinematicBody2D*)whiteKingScene->instance();
-		ChessPiece* kingSC = Object::cast_to<ChessPiece>(kingBody);
-		kingSC->assignInitialDirections(x, y);
-		pieceHolder->add_child(kingBody);
-
-		if (!usePrepHeuriscticValButton->is_pressed())
-		{
-			kingSC->setParameters(chessPieceParameters[5][0], chessPieceParameters[5][1],
-				chessPieceParameters[5][2], chessPieceParameters[5][3]);
-		}
-
-		chessPiece = kingSC;
+		spawnWhiteKingPosition(x, y);
 	}
 }
 
@@ -486,6 +410,12 @@ void PieceSpawner::setChessPieceParametersToArray()
 			
 		}
 		
+	}
+
+	if (usePrepHeuriscticValButton->is_pressed())
+	{
+		setEfficentHeuristicParameters();
+		return;
 	}
 }
 
@@ -601,4 +531,37 @@ bool PieceSpawner::isFenNotationValid(String fenNotation)
 
 	FEN = fenNotation;
 	return true;
+}
+
+void PieceSpawner::setEfficentHeuristicParameters()
+{
+	// Pawn Parameters
+	chessPieceParameters[0][2] = 1;
+	chessPieceParameters[0][3] = 3;
+
+	// Knight Parameters
+	chessPieceParameters[1][2] = 2;
+	chessPieceParameters[1][3] = 4;
+
+	// Bishop Parameters
+	chessPieceParameters[2][2] = 2;
+	chessPieceParameters[2][3] = 4;
+
+	// Rook Parameters
+	chessPieceParameters[3][2] = 3;
+	chessPieceParameters[3][3] = 5;
+
+	// Queen Parameters
+	chessPieceParameters[4][2] = 3;
+	chessPieceParameters[4][3] = 6;
+
+	// WhiteKing Parameters
+	chessPieceParameters[5][2] = 15;
+	chessPieceParameters[5][3] = 1000;
+
+	// BlackKing Parameters
+	chessPieceParameters[6][0] = 10;
+	chessPieceParameters[6][1] = 5;
+	chessPieceParameters[6][2] = 2;
+
 }

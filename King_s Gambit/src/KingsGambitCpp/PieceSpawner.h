@@ -12,6 +12,7 @@
 #include <CheckButton.hpp>
 #include <AudioStreamPlayer2D.hpp>
 #include <TextEdit.hpp>
+#include <Label.hpp>
 
 #include "TurnController.h"
 
@@ -72,6 +73,8 @@ private:
 
 	CheckButton* usePrepHeuriscticValButton;
 
+	Label* countDown;
+
 	String FEN;
 
 	// 0 -> Pawn | 1 -> Knight | 2 -> Bishop | 3 -> Rook | 4 -> Queen | 5 -> WhiteKing | 6 -> BlackKing 
@@ -85,6 +88,8 @@ private:
 	void setChessPieceParametersToArray();
 
 	void setChessPieceAmountsWithFenNotation();
+
+	void setEfficentHeuristicParameters();
 
 	void closeUI();
 

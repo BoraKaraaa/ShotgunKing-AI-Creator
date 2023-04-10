@@ -2,16 +2,24 @@
 
 #include "BlackKing.h"
 
+#include "CountDown.h"
+
 WhiteKing* WhiteKing::whiteKingInstance = NULL;
 
 void WhiteKing::_register_methods()
 {
 	register_method((char*)"_init", &WhiteKing::_init);
+	register_method((char*)"_ready", &WhiteKing::_ready);
 }
 
 void WhiteKing::_init()
 {
 	whiteKingInstance = this;
+}
+
+void WhiteKing::_ready()
+{
+	moveCounter = (Label*)get_node("/root/MainScene/GameUI/MoveCountAmount");
 }
 
 void WhiteKing::takeTurn()
@@ -173,9 +181,8 @@ void WhiteKing::runAway()
 
 void WhiteKing::die()
 {
-	Godot::print("YOU WIN THE GAME");
-
-	TurnController::turnControllerInstance->stopTurn();
+	//TurnController::turnControllerInstance->stopTurn();
+	//CountDown::countDownInstance->stopCountDown();
 
 	//changeSquareThreatCount(-1);
 	__super::die();

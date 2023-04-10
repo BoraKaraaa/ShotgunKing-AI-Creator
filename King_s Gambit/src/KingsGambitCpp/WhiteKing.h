@@ -3,6 +3,8 @@
 
 #include "ChessBoard.h"
 
+#include <Label.hpp>
+
 class WhiteKing : public ChessPiece
 {
 	GODOT_CLASS(WhiteKing, ChessPiece);
@@ -12,6 +14,7 @@ public:
 
 	static void _register_methods();
 	void _init();
+	void _ready();
 
 	void takeTurn() override;
 	void moveTo(int, int) override;
@@ -21,6 +24,8 @@ public:
 	void die() override;
 
 private:
+	Label* moveCounter;
+
 	void whiteKingAI();
 	void runAway();
 };

@@ -166,6 +166,7 @@
     <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="ChessPieceColor.h" />
     <ClInclude Include="ChessPieceType.h" />
+    <ClInclude Include="CountDown.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="GunType.h" />
     <ClInclude Include="Knight.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="CameraNoise.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
+    <ClCompile Include="CountDown.cpp" />
     <ClCompile Include="GodotLib.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Knight.cpp" />

@@ -78,8 +78,10 @@ void Pawn::pawnAI()
 	// Pawn Promotion
 	if(pY == 7)
 	{
+
+		// Queen Parameters is not true
 		spawnQueenToPosition(pX, pY);
-		
+
 		// destroy the pawn
 		TurnController::turnControllerInstance->deleteWhitePiece(this);
 

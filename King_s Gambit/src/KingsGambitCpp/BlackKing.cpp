@@ -6,6 +6,8 @@
 #include "WhiteKing.h"
 #include "PieceSpawner.h"
 
+#include "CountDown.h"
+
 BlackKing* BlackKing::blackKingInstance = NULL;
 
 void BlackKing::_register_methods()
@@ -64,6 +66,12 @@ BlackKing::~BlackKing()
 
 void BlackKing::takeTurn()
 {
+	if(firstMove)
+	{
+		setMinMoveToKillWhiteKing();
+		firstMove = false;
+	}
+
 	if(!isDead)
 	{
 		createAllPossibleSnapshots();
@@ -141,9 +149,9 @@ void BlackKing::createMoveSnapshots(int lastX, int lastY)
 
 	newSnapshot.isMoving = true;
 
-	newSnapshot.movePosition = Vector2(lastX, lastY);
+	newSnapshot.movePosition = Vector2(lastX, lastY); 
 
-	newSnapshot.chessPiecePositionDictioanry[this] = Vector2(pX, pY);
+	newSnapshot.chessPiecePositionDictioanry[this] = Vector2(lastX, lastY);  // WTFFFFFFF
 
 	for (ChessPiece* chessPiece : TurnController::turnControllerInstance->whitePieces)
 	{
@@ -165,10 +173,24 @@ int BlackKing::moveHeuristicValueCalculator(int lastX, int lastY)
 
 void BlackKing::playBestMove()
 {
+	//Godot::print(String::num_int64(snapshotQueue.size()));
+
+	// Base Case
+
 	if(snapshotQueue.size() == 0)
 	{
-		Godot::print("YOU CANT WIN");
+		if(winGame)
+		{
+			Godot::print("GAME FINISHED -> YOU WIN");
+		}
+		else
+		{
+			Godot::print("GAME FINISHED -> YOU LOSE");
+		}
+
 		TurnController::turnControllerInstance->stopTurn();
+		CountDown::countDownInstance->stopCountDown();
+
 		return;
 	}
 
@@ -177,16 +199,58 @@ void BlackKing::playBestMove()
 
 	currSS = currSnapshot;
 
-	goSnapshot(currSnapshot);
+	// Tree pruning with looking min successful path
 
-	// TODO: PAWN ISSUE 
+	if(currSnapshot.totalMoveCount >= minSuccessfulPathLength)
+	{
+		// Kill the long path
+		playBestMove();
+		return;
+	}
+
+	// --------------------------------------------
+
+
+	// Handle Endless Loops & Same Positions
+
+	bool isSameSnapshotIncluded = false;
+
+	for (Snapshot visitedSnapshot : visitedSnapshots)
+	{
+		Snapshot* res = isTwoSnapshotsEquals(&visitedSnapshot, &currSnapshot);
+
+		if (res == &visitedSnapshot)
+		{
+			// Kill the endless loop
+			playBestMove();
+			return;
+		}
+		else if (res == &currSnapshot)
+		{
+			visitedSnapshots.erase(std::remove(visitedSnapshots.begin(), visitedSnapshots.end(), visitedSnapshot), visitedSnapshots.end());
+			visitedSnapshots.push_back(*res);
+			isSameSnapshotIncluded = true;
+			break;
+		}
+	}
+
+	if (!isSameSnapshotIncluded)
+	{
+		visitedSnapshots.push_back(currSnapshot);
+	}
+
+	// -----------------------
+
+	goSnapshot(&currSnapshot);
+
 
 	if(currSnapshot.isMoving)
 	{
 		lookPosition(currSnapshot.movePosition.x, currSnapshot.movePosition.y);
 
 		showArrow(currSnapshot.movePosition.x, currSnapshot.movePosition.y);
-		waitNSecond(0.2, "unshowArrowAndMove");
+		waitNSecond(0.004, "unshowArrowAndMove");
+		//unshowArrowAndMove();
 	}
 	else
 	{
@@ -197,25 +261,38 @@ void BlackKing::playBestMove()
 
 		targetIcon->set_position(targetPivotPoint);
 
-		waitNSecond(0.3, "gunHitPiece");
+		waitNSecond(0.005, "gunHitPiece");
+		//gunHitPiece();
 	}
 
 }
 
-void BlackKing::goSnapshot(Snapshot currSnapshot)
+void BlackKing::goSnapshot(Snapshot* currSnapshot)
 {
-	std::map<ChessPiece*, Vector2>::iterator iter = currSnapshot.chessPiecePositionDictioanry.begin();
+	std::map<ChessPiece*, Vector2>::iterator iter = currSnapshot->chessPiecePositionDictioanry.begin();
 
-	while (iter != currSnapshot.chessPiecePositionDictioanry.end())
+	for (ChessPiece* chessPiece : TurnController::turnControllerInstance->whitePieces)
 	{
+		chessPiece->isDied = true;
+		chessPiece->set_visible(false);
+	}
+
+	TurnController::turnControllerInstance->whitePieces.clear();
+
+	while (iter != currSnapshot->chessPiecePositionDictioanry.end())
+	{
+		if(iter->first == this) // Skip BlackKing Position
+		{
+			iter++;
+			continue;
+		}
+
 		if(iter->first->isDied)
 		{
 			iter->first->isDied = false;
 			iter->first->set_visible(true);
 
 			TurnController::turnControllerInstance->setWhitePiece(iter->first);
-
-			//PieceSpawner::pieceSpawnerInstance->spawnChessPieceWhitType(iter->first, iter->second.x, iter->second.y); // create and move
 		}
 
 		iter->first->moveImmediately(iter->second.x, iter->second.y); // instant movement
@@ -223,11 +300,59 @@ void BlackKing::goSnapshot(Snapshot currSnapshot)
 		++iter;
 	}
 
-	heuristicStartingValue = currSnapshot.heuristicValue;
-	counter = currSnapshot.totalMoveCount;
+	heuristicStartingValue = currSnapshot->heuristicValue;
+	counter = currSnapshot->totalMoveCount;
 	moveCounter->set_text(String::num_int64(counter));
 
 	ChessBoard::chessBoardInstance->clearBoardThreatCount();
+}
+
+Snapshot* BlackKing::isTwoSnapshotsEquals(Snapshot* s1, Snapshot* s2)
+{
+
+	if(s1->isMoving != s2->isMoving)
+	{
+		return nullptr;
+	}
+
+	std::map<ChessPiece*, Vector2>::iterator iter1 = s1->chessPiecePositionDictioanry.begin();
+
+	while (iter1 != s1->chessPiecePositionDictioanry.end())
+	{
+		std::map<ChessPiece*, Vector2>::iterator iter2 = s2->chessPiecePositionDictioanry.begin();
+
+		bool sameChessPiece = false;
+
+		while (iter2 != s2->chessPiecePositionDictioanry.end())
+		{
+
+			if( (iter2->first == iter1->first) && (iter2->second.x == iter1->second.x) && 
+				(iter2->second.y == iter1->second.y))
+			{
+				sameChessPiece = true;
+				break;
+			}
+
+			++iter2;
+		}
+
+		if(!sameChessPiece)
+		{
+			return nullptr;
+		}
+
+		++iter1;
+	}
+
+	if(s1->totalMoveCount > s2->totalMoveCount)
+	{
+		return s2;
+	}
+	else if(s1->totalMoveCount <= s2->totalMoveCount)
+	{
+		return s1; 
+	}
+
 }
 
 void BlackKing::setGunType(int gunT)
@@ -243,7 +368,6 @@ int BlackKing::getGunType()
 void BlackKing::die()
 {
 	isDead = true;
-	Godot::print("--------------YOU LOST-------------");
 }
 
 void BlackKing::setBlackKingParameters(int heuristicStartingVal, int eachMoveMinusVal, int heuristicDistanceMultip)
@@ -392,8 +516,39 @@ void BlackKing::gunHitPiece()
 
 	bulletParticle->set_emitting(true);
 
+	if(currSS.hitPiece == WhiteKing::whiteKingInstance)
+	{
+		if(WhiteKing::whiteKingInstance->canKill(gun->gunDamage))
+		{
+			winGame = true;
+			minSuccessfulPathLength = currSS.totalMoveCount;
+			Godot::print(String::num_int64(minSuccessfulPathLength));
+
+			if(minSuccessfulPathLength <= minMoveToKillWhiteKing)
+			{
+				Godot::print("GAME FINISHED -> YOU WIN");
+				TurnController::turnControllerInstance->stopTurn();
+				CountDown::countDownInstance->stopCountDown();
+			}
+			
+		}
+	}
+
 	gun->hitPiece(currSS.hitPiece);
 	targetIcon->set_position(Vector2(-50, -50));
+}
+
+void BlackKing::setMinMoveToKillWhiteKing()
+{
+	minMoveToKillWhiteKing = ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare(this->pX, this->pY,
+		WhiteKing::whiteKingInstance->pX, WhiteKing::whiteKingInstance->pY) - 2 + 1;
+
+	if (minMoveToKillWhiteKing < 1)
+	{
+		minMoveToKillWhiteKing = 1;
+	}
+
+	Godot::print(String::num_int64(minMoveToKillWhiteKing));
 }
 
 void BlackKing::waitNSecond(float second, String callbackFunc)

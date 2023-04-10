@@ -5,6 +5,8 @@
 
 #include "CameraNoise.h"
 
+#include "CountDown.h"
+
 #include "ChessPiece.h"
 
 #include "Pawn.h"
@@ -38,6 +40,8 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<PieceSpawner>();
 
 	register_class<CameraNoise>();
+
+	register_class<CountDown>();
 
 	// Pieces
 	register_class<ChessPiece>();

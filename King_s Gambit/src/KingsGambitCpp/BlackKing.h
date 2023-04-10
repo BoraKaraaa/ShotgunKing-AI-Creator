@@ -6,6 +6,7 @@
 #include <AudioStreamPlayer2D.hpp>
 #include <Particles2D.hpp>
 
+#include <algorithm>
 #include <queue>
 #include <map>
 
@@ -28,6 +29,11 @@ struct Snapshot
 	{
 		return heuristicValue < other.heuristicValue; // arrenge for prioraty queue prioritization
 	}
+
+	bool operator==(const Snapshot& other) const
+	{
+		return this == &other;
+	}
 };
 
 class BlackKing : public ChessPiece
@@ -37,6 +43,10 @@ class BlackKing : public ChessPiece
 public:
 	static BlackKing* blackKingInstance;
 	std::priority_queue<Snapshot> snapshotQueue;
+
+	std::vector<Snapshot> visitedSnapshots;
+
+	Gun* gun;
 
 	int counter = 0;
 
@@ -63,19 +73,29 @@ protected:
 	inline int getGunType();
 	void setGunType(int);
 
+	bool winGame = false;
+
+	int minSuccessfulPathLength = 99999;
+
+	int firstMove = true;
+	int minMoveToKillWhiteKing;
+
+	void setMinMoveToKillWhiteKing();
+
+	// Search AI Functions
 	void createAllPossibleSnapshots();
 	void createMoveSnapshots(int, int);
 	int moveHeuristicValueCalculator(int, int);
 	void playBestMove();
-	void goSnapshot(Snapshot);
+	void goSnapshot(Snapshot*);
 
+	Snapshot* isTwoSnapshotsEquals(Snapshot*, Snapshot*); // if equal return min totalMoveCount Snapshot if not equal return NULL
 
 private:
 	Label* moveCounter;
 
 	Snapshot currSS;
 
-	Gun* gun;
 	GunType gunType;
 
 	AnimatedSprite* animatedSprite;

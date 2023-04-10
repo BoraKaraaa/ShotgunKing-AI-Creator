@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Nodes/ChessBoard.tscn" type="PackedScene" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://Audios/pressButton.wav" type="AudioStream" id=25]
 [ext_resource path="res://Audios/pickupCoin (3).wav" type="AudioStream" id=26]
 [ext_resource path="res://TextFont/bescii.ttf" type="DynamicFontData" id=27]
+[ext_resource path="res://Sprites/WhiteStones/Shotgun.png" type="Texture" id=28]
+[ext_resource path="res://Scripts/CountDown.gdns" type="Script" id=29]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -79,6 +81,12 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 11
+font_data = ExtResource( 27 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 27 )
 
 [node name="MainScene" type="Node2D"]
@@ -140,6 +148,7 @@ text = "0"
 align = 1
 
 [node name="Gun&Bullet" type="Node2D" parent="."]
+visible = false
 
 [node name="GunUi" type="Sprite" parent="Gun&Bullet"]
 position = Vector2( 408, 83 )
@@ -346,5 +355,31 @@ drag_and_drop_selection_enabled = false
 smooth_scrolling = true
 wrap_enabled = true
 caret_blink = true
+
+[node name="GunList" type="ItemList" parent="."]
+visible = false
+margin_left = 313.0
+margin_top = 21.0
+margin_right = 516.622
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 7 )
+items = [ "Sniper", ExtResource( 28 ), false, "Shotgun", ExtResource( 28 ), false ]
+auto_height = true
+max_columns = 2
+same_column_width = true
+icon_mode = 0
+icon_scale = 15.0
+fixed_icon_size = Vector2( 5.817, 3.745 )
+
+[node name="CountDown" type="Label" parent="."]
+visible = false
+margin_left = 372.0
+margin_top = 70.0
+margin_right = 420.696
+margin_bottom = 86.0
+rect_scale = Vector2( 1.5, 1.5 )
+custom_fonts/font = SubResource( 8 )
+text = "0:0"
+script = ExtResource( 29 )
 
 [connection signal="pressed" from="RestartButton" to="RestartButton" method="_on_RestartButton_pressed"]

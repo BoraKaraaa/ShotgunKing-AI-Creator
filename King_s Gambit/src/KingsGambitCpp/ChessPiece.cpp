@@ -71,7 +71,7 @@ void ChessPiece::lastOneCountToPlay()
 void ChessPiece::moveTo(int x, int y) 
 {
 	tween->connect("tween_completed", this, "moveTweenCompleted");
-	tween->interpolate_property(this, "position", get_position(), ChessBoard::chessBoardInstance->getSquarePivotPosition(x, y), 0.2, 10, 1);
+	tween->interpolate_property(this, "position", get_position(), ChessBoard::chessBoardInstance->getSquarePivotPosition(x, y), 0.002, 10, 1);
 	tween->start();
 
 	ChessBoard::chessBoardInstance->getSquare(pX, pY)->setPieceToSquare(nullptr);
@@ -116,7 +116,7 @@ void ChessPiece::takeDamage(int damageAmount)
 
 void ChessPiece::die()
 {
-	playDeadParticle();
+	//playDeadParticle();
 
 	TurnController::turnControllerInstance->deleteWhitePiece(this);
 

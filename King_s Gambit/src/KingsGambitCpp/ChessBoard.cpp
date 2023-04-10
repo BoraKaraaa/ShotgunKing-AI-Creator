@@ -125,10 +125,12 @@ float ChessBoard::twoSquareDistance(int fX, int fY, int sX, int sY)
 	return sqrt((pow(abs(sX - fX), 2) + pow(abs(sY - fY), 2)));
 }
 
+
 int ChessBoard::twoSquareDistanceWithSquare(int fX, int fY, int sX, int sY)
 {
 	return std::max(abs(fX - sX), abs(fY - sY));
 }
+
 
 bool ChessBoard::isSquareValid(int x, int y)
 {

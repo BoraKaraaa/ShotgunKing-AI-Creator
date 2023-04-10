@@ -24,11 +24,13 @@ void TurnController::startTurn()
 {
 	if(pTurnType == TurnType::BLACK)
 	{
-		waitNSecond(0.5, "blackTurn");
+		waitNSecond(0.01, "blackTurn");
+		//blackTurn();
 	}
 	else
 	{
-		waitNSecond(0.5, "whiteTurn");
+		waitNSecond(0.01, "whiteTurn");
+		//whiteTurn();
 	}
 }
 
@@ -43,10 +45,12 @@ void TurnController::blackTurn()
 {
 	blakcPiece->takeTurn();
 
-	Godot::print("Black Turn");
+	//Godot::print("Black Turn"); --------------------------------------
 
 	disconnect("timeout", this, "blackTurn");
-	waitNSecond(0.5, "whiteTurn");
+
+	waitNSecond(0.01, "whiteTurn");
+	//whiteTurn();
 }
 
 void TurnController::whiteTurn()
@@ -75,12 +79,13 @@ void TurnController::whiteTurn()
 
 	//isStart = false;
 
-	Godot::print("White Turn");
+	//Godot::print("White Turn"); ------------------------------------
 
 	disconnect("timeout", this, "whiteTurn");
-	waitNSecond(0.5, "blackTurn");
-
 	updateWhitePieces();
+
+	waitNSecond(0.01, "blackTurn");
+	//blackTurn();
 }
 
 

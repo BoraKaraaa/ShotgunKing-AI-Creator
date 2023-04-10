@@ -14,8 +14,6 @@ script = ExtResource( 2 )
 TurnCount = 1
 HealthAmount = 1
 moveDuration = 1
-takeDamageHeuristicValue = 3
-dieHeuristicValue = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.666667, -8 )
