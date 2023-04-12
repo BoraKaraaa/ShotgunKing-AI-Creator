@@ -5,6 +5,7 @@
 #include <Sprite.hpp>
 #include <AudioStreamPlayer2D.hpp>
 #include <Particles2D.hpp>
+#include <TextEdit.hpp>
 
 #include <algorithm>
 #include <queue>
@@ -92,7 +93,15 @@ protected:
 	Snapshot* isTwoSnapshotsEquals(Snapshot*, Snapshot*); // if equal return min totalMoveCount Snapshot if not equal return NULL
 
 private:
+	int totalTry = 0;
+
 	Label* moveCounter;
+	Label* totalTryAmountText;
+	Label* gameResultText;
+
+	Label* queuedPositionAmountText;
+
+	TextEdit* leaderBoard;
 
 	Snapshot currSS;
 
@@ -127,4 +136,6 @@ private:
 
 	void gunHitPiece();
 	void waitNSecond(float, String);
+
+	void updateLeaderBoard(int);
 };

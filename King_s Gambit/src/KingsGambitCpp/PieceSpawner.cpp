@@ -58,10 +58,15 @@ void PieceSpawner::_ready()
 	chessPieceInfoUIHolder = (Control*)get_node("/root/MainScene/ChessPieceInfoUIHolder");
 
 	fenNotationText = (TextEdit*)get_node("/root/MainScene/FenNotationText");
+	leaderBoard = (TextEdit*)get_node("/root/MainScene/LeaderBoard");
 
 	usePrepHeuriscticValButton = (CheckButton*)get_node("/root/MainScene/PrepHeuristicValueButton");
 
 	countDown = (Label*)get_node("/root/MainScene/CountDown");
+
+	totalTryText = (Label*)get_node("/root/MainScene/GameUI2/TotalPossibilities");
+	totalQueuedPosText = (Label*)get_node("/root/MainScene/GameUI2/QueuedPositions");
+	pauseText = (Label*)get_node("/root/MainScene/GameUI2/PauseText");
 
 	playButton->connect("pressed", this, "startGame");
 }
@@ -75,6 +80,8 @@ void PieceSpawner::startGame()
 	playButton->disconnect("pressed", this, "startGame");
 
 	closeUI();
+	openUI();
+
 	pressAudio->play();
 
 	// Spawn Pieces
@@ -86,7 +93,9 @@ void PieceSpawner::startGame()
 	else
 	{
 		setChessPieceAmounts();
-		waitNSecond(1, "spawnPieces");
+
+		//waitNSecond(1, "spawnPieces");
+		spawnPieces();
 	}
 
 	Godot::print("Wait For Spawning Pieces");
@@ -94,7 +103,7 @@ void PieceSpawner::startGame()
 
 void PieceSpawner::spawnPieces()
 {
-	queue_free();
+	//queue_free();
 
 	setChessPieceParametersToArray();
 
@@ -170,11 +179,12 @@ void PieceSpawner::spawnPieces()
 		spawnBlackKingToPosition(3, 7);
 	}
 
+	//disconnect("timeout", this, "spawnPieces");
+
 	CountDown::countDownInstance->set_visible(true);
 	CountDown::countDownInstance->startCountDown();
-
+	
 	TurnController::turnControllerInstance->startTurn();
-	disconnect("timeout", this, "spawnPieces");
 }
 
 void PieceSpawner::setChessPieceAmountsWithFenNotation()
@@ -266,6 +276,7 @@ void PieceSpawner::spawnWhiteKingPosition(int x, int y)
 	KinematicBody2D* kingBody = (KinematicBody2D*)whiteKingScene->instance();
 	ChessPiece* kingSC = Object::cast_to<ChessPiece>(kingBody);
 	kingSC->assignInitialDirections(x, y);
+
 	pieceHolder->add_child(kingBody);
 
 	kingSC->setParameters(chessPieceParameters[5][0], chessPieceParameters[5][1],
@@ -370,6 +381,14 @@ void PieceSpawner::closeUI()
 	chessPieceInfoUIHolder->set_visible(false);
 	usePrepHeuriscticValButton->set_visible(false);
 	fenNotationText->set_visible(false);
+}
+
+void PieceSpawner::openUI()
+{
+	totalTryText->set_visible(true);
+	totalQueuedPosText->set_visible(true);
+	pauseText->set_visible(true);
+	leaderBoard->set_visible(true);
 }
 
 void PieceSpawner::setChessPieceParametersToArray()

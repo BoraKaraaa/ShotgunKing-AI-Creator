@@ -35,6 +35,8 @@ ChessBoard::~ChessBoard()
 
 void ChessBoard::initSquares()
 {
+	boardDimensions = Vector2(8, 8);
+
 	squareArray = new Square ** [boardDimensions.x];
 
 	for (int i = 0; i < boardDimensions.x; i++)
@@ -45,14 +47,11 @@ void ChessBoard::initSquares()
 		{
 			squareArray[i][j] = new Square(i, j);
 		}
-
 	}
-
 }
 
 void ChessBoard::destroySquares()
 {
-
 	if(squareArray)
 	{
 		for (int i = 0; i < boardDimensions.x; i++)
@@ -68,7 +67,6 @@ void ChessBoard::destroySquares()
 
 	delete squareArray;
 	squareArray = nullptr;
-
 }
 
 void ChessBoard::setBoardDimensions(Vector2 v)

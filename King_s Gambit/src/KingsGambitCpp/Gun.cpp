@@ -12,7 +12,7 @@ Gun::~Gun() {}
 
 void Gun::hitPiece(ChessPiece* chessPiece)
 {
-	CameraNoise::cameraNoiseInstance->doCameraShake(120, 0.3, 120);
+	//CameraNoise::cameraNoiseInstance->doCameraShake(120, 0.3, 120);
 
 	chessPiece->takeDamage(gunDamage);
 }

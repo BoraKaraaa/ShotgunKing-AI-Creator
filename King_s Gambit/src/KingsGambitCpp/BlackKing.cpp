@@ -39,6 +39,12 @@ void BlackKing::_init()
 void BlackKing::_ready()
 {
 	moveCounter = (Label*)get_node("/root/MainScene/GameUI/MoveCountAmount");
+	totalTryAmountText = (Label*)get_node("/root/MainScene/GameUI2/TriedPositions");
+	gameResultText = (Label*)get_node("/root/MainScene/GameUI2/GameResult");
+
+	queuedPositionAmountText = (Label*)get_node("/root/MainScene/GameUI2/QueuedPosAmount");
+
+	leaderBoard = (TextEdit*)get_node("/root/MainScene/LeaderBoard");
 
 	animatedSprite = (AnimatedSprite*)get_node("/root/MainScene/PieceHolder/BlackKing/KingSprite/KingAnimation");
 	gunSprite = (Sprite*)get_node("/root/MainScene/PieceHolder/BlackKing/Gun");
@@ -57,6 +63,7 @@ void BlackKing::_ready()
 
 	current_animation = "Idle";
 }
+
 
 BlackKing::~BlackKing()
 {
@@ -151,7 +158,7 @@ void BlackKing::createMoveSnapshots(int lastX, int lastY)
 
 	newSnapshot.movePosition = Vector2(lastX, lastY); 
 
-	newSnapshot.chessPiecePositionDictioanry[this] = Vector2(lastX, lastY);  // WTFFFFFFF
+	newSnapshot.chessPiecePositionDictioanry[this] = Vector2(lastX, lastY); 
 
 	for (ChessPiece* chessPiece : TurnController::turnControllerInstance->whitePieces)
 	{
@@ -175,16 +182,21 @@ void BlackKing::playBestMove()
 {
 	//Godot::print(String::num_int64(snapshotQueue.size()));
 
+	totalTryAmountText->set_text(String::num_int64(++totalTry));
+	queuedPositionAmountText->set_text(String::num_int64(snapshotQueue.size()));
+
 	// Base Case
 
 	if(snapshotQueue.size() == 0)
 	{
 		if(winGame)
 		{
+			gameResultText->set_text("YOU WON THE GAME");
 			Godot::print("GAME FINISHED -> YOU WIN");
 		}
 		else
 		{
+			gameResultText->set_text("YOU LOST THE GAME");
 			Godot::print("GAME FINISHED -> YOU LOSE");
 		}
 
@@ -223,6 +235,7 @@ void BlackKing::playBestMove()
 		{
 			// Kill the endless loop
 			playBestMove();
+
 			return;
 		}
 		else if (res == &currSnapshot)
@@ -249,8 +262,8 @@ void BlackKing::playBestMove()
 		lookPosition(currSnapshot.movePosition.x, currSnapshot.movePosition.y);
 
 		showArrow(currSnapshot.movePosition.x, currSnapshot.movePosition.y);
-		waitNSecond(0.004, "unshowArrowAndMove");
-		//unshowArrowAndMove();
+		//waitNSecond(0.004, "unshowArrowAndMove");
+		unshowArrowAndMove();
 	}
 	else
 	{
@@ -261,8 +274,8 @@ void BlackKing::playBestMove()
 
 		targetIcon->set_position(targetPivotPoint);
 
-		waitNSecond(0.005, "gunHitPiece");
-		//gunHitPiece();
+		//waitNSecond(0.005, "gunHitPiece");
+		gunHitPiece();
 	}
 
 }
@@ -498,7 +511,7 @@ void BlackKing::showArrow(int x, int y)
 
 void BlackKing::unshowArrowAndMove()
 {
-	shotTimer->disconnect("timeout", this, "unshowArrowAndMove");
+	//shotTimer->disconnect("timeout", this, "unshowArrowAndMove");
 
 	straightArrow->set_visible(false);
 	crossArrow->set_visible(false);
@@ -510,7 +523,7 @@ void BlackKing::unshowArrowAndMove()
 
 void BlackKing::gunHitPiece()
 {
-	shotTimer->disconnect("timeout", this, "gunHitPiece");
+	//shotTimer->disconnect("timeout", this, "gunHitPiece");
 
 	shotAudio->play();
 
@@ -524,9 +537,12 @@ void BlackKing::gunHitPiece()
 			minSuccessfulPathLength = currSS.totalMoveCount;
 			Godot::print(String::num_int64(minSuccessfulPathLength));
 
+			updateLeaderBoard(minSuccessfulPathLength);
+
 			if(minSuccessfulPathLength <= minMoveToKillWhiteKing)
 			{
 				Godot::print("GAME FINISHED -> YOU WIN");
+				gameResultText->set_text("YOU WON THE GAME");
 				TurnController::turnControllerInstance->stopTurn();
 				CountDown::countDownInstance->stopCountDown();
 			}
@@ -536,6 +552,13 @@ void BlackKing::gunHitPiece()
 
 	gun->hitPiece(currSS.hitPiece);
 	targetIcon->set_position(Vector2(-50, -50));
+}
+
+void BlackKing::updateLeaderBoard(int moveCount)
+{
+	String currText = leaderBoard->get_text();
+	currText += String::num_int64(moveCount) + "M " + String::num_int64(CountDown::countDownInstance->time) + "S\n";
+	leaderBoard->set_text(currText);
 }
 
 void BlackKing::setMinMoveToKillWhiteKing()

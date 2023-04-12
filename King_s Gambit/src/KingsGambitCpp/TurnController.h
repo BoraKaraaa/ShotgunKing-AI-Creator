@@ -19,8 +19,12 @@ public:
 
 	std::vector<ChessPiece*> whitePieces;
 
+	bool isGameStarted = false;
+	bool isTurnFinished = false;
+
 	static void _register_methods();
 	void _init();
+	void _process(float);
 
 	TurnController();
 	~TurnController();

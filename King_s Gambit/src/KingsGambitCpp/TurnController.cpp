@@ -6,6 +6,7 @@ TurnType TurnController::pTurnType = TurnType::BLACK;
 void TurnController::_register_methods()
 {
 	register_method((char*)"_init", &TurnController::_init);
+	register_method((char*)"_process", &TurnController::_process);
 	register_method((char*)"blackTurn", &TurnController::blackTurn);
 	register_method((char*)"whiteTurn", &TurnController::whiteTurn);
 }
@@ -20,17 +21,32 @@ TurnController::TurnController() { }
 TurnController::~TurnController() { }
 
 
+void TurnController::_process(float delta)
+{
+	if(isTurnFinished)
+	{
+		if(pTurnType == TurnType::BLACK)
+		{
+			blackTurn();
+		}
+		else
+		{
+			whiteTurn();
+		}
+	}
+}
+
 void TurnController::startTurn()
 {
 	if(pTurnType == TurnType::BLACK)
 	{
-		waitNSecond(0.01, "blackTurn");
-		//blackTurn();
+		//waitNSecond(1, "blackTurn");
+		blackTurn();
 	}
 	else
 	{
-		waitNSecond(0.01, "whiteTurn");
-		//whiteTurn();
+		//waitNSecond(1, "whiteTurn");
+		whiteTurn();
 	}
 }
 
@@ -43,18 +59,25 @@ void TurnController::stopTurn()
 
 void TurnController::blackTurn()
 {
+	isTurnFinished = false;
+
 	blakcPiece->takeTurn();
 
-	//Godot::print("Black Turn"); --------------------------------------
+	//Godot::print("Black Turn");
 
-	disconnect("timeout", this, "blackTurn");
+	//disconnect("timeout", this, "blackTurn");
 
-	waitNSecond(0.01, "whiteTurn");
+	//waitNSecond(0.01, "whiteTurn");
 	//whiteTurn();
+
+	pTurnType = TurnType::WHITE;
+	isTurnFinished = true;
 }
 
 void TurnController::whiteTurn()
 {
+	isTurnFinished = false;
+
 	/*
 	if(!isStart)
 	{
@@ -79,13 +102,16 @@ void TurnController::whiteTurn()
 
 	//isStart = false;
 
-	//Godot::print("White Turn"); ------------------------------------
+	//Godot::print("White Turn");
 
-	disconnect("timeout", this, "whiteTurn");
+	//disconnect("timeout", this, "whiteTurn");
 	updateWhitePieces();
 
-	waitNSecond(0.01, "blackTurn");
+	//waitNSecond(0.01, "blackTurn");
 	//blackTurn();
+
+	pTurnType = TurnType::BLACK;
+	isTurnFinished = true;
 }
 
 

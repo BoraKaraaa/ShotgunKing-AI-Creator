@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://TextFont/bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Nodes/ChessBoard.tscn" type="PackedScene" id=2]
@@ -89,6 +89,20 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 27 )
 
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 15
+font_data = ExtResource( 27 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.141176, 0.133333, 0.211765, 1 )
+corner_detail = 9
+
 [node name="MainScene" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -143,6 +157,7 @@ margin_top = 35.9854
 margin_right = 119.538
 margin_bottom = 51.9854
 rect_scale = Vector2( 0.1, 0.1 )
+custom_colors/font_color = Color( 0.788235, 0.301961, 0.301961, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
@@ -372,7 +387,6 @@ icon_scale = 15.0
 fixed_icon_size = Vector2( 5.817, 3.745 )
 
 [node name="CountDown" type="Label" parent="."]
-visible = false
 margin_left = 372.0
 margin_top = 70.0
 margin_right = 420.696
@@ -381,5 +395,95 @@ rect_scale = Vector2( 1.5, 1.5 )
 custom_fonts/font = SubResource( 8 )
 text = "0:0"
 script = ExtResource( 29 )
+
+[node name="GameUI2" type="Control" parent="."]
+margin_right = 800.0
+margin_bottom = 600.0
+mouse_filter = 2
+
+[node name="GameResult" type="Label" parent="GameUI2"]
+margin_left = 234.0
+margin_top = 21.0
+margin_right = 434.0
+margin_bottom = 41.0
+rect_scale = Vector2( 1.8, 1.8 )
+custom_colors/font_color = Color( 0.788235, 0.301961, 0.301961, 1 )
+custom_fonts/font = SubResource( 9 )
+align = 1
+
+[node name="PauseText" type="Label" parent="GameUI2"]
+visible = false
+margin_left = 23.0
+margin_top = 28.0
+margin_right = 123.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 9 )
+text = "P For Puase"
+align = 1
+
+[node name="TotalPossibilities" type="Label" parent="GameUI2"]
+visible = false
+margin_left = 610.0
+margin_top = 169.0
+margin_right = 710.0
+margin_bottom = 209.491
+rect_scale = Vector2( 1.8, 1.8 )
+custom_fonts/font = SubResource( 10 )
+text = "Tried Positions"
+align = 1
+autowrap = true
+
+[node name="QueuedPositions" type="Label" parent="GameUI2"]
+visible = false
+margin_left = 612.0
+margin_top = 325.0
+margin_right = 712.0
+margin_bottom = 365.491
+rect_scale = Vector2( 1.8, 1.8 )
+custom_fonts/font = SubResource( 10 )
+text = "Queued POSITIONS"
+align = 1
+autowrap = true
+
+[node name="TriedPositions" type="Label" parent="GameUI2"]
+margin_left = 639.0
+margin_top = 246.0
+margin_right = 707.79
+margin_bottom = 266.706
+rect_scale = Vector2( 1.8, 1.8 )
+custom_colors/font_color = Color( 0.788235, 0.301961, 0.301961, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+
+[node name="QueuedPosAmount" type="Label" parent="GameUI2"]
+margin_left = 641.0
+margin_top = 406.0
+margin_right = 709.79
+margin_bottom = 426.706
+rect_scale = Vector2( 1.8, 1.8 )
+custom_colors/font_color = Color( 0.788235, 0.301961, 0.301961, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+autowrap = true
+
+[node name="LeaderBoard" type="TextEdit" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 181.0
+margin_right = 200.0
+margin_bottom = 381.0
+custom_fonts/font = SubResource( 11 )
+custom_styles/read_only = SubResource( 12 )
+readonly = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+breakpoint_gutter = true
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+smooth_scrolling = true
+wrap_enabled = true
 
 [connection signal="pressed" from="RestartButton" to="RestartButton" method="_on_RestartButton_pressed"]

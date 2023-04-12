@@ -71,9 +71,16 @@ private:
 
 	TextEdit* fenNotationText;
 
+	TextEdit* leaderBoard;
+
 	CheckButton* usePrepHeuriscticValButton;
 
 	Label* countDown;
+
+	Label* totalTryText;
+	Label* totalQueuedPosText;
+
+	Label* pauseText;
 
 	String FEN;
 
@@ -92,6 +99,7 @@ private:
 	void setEfficentHeuristicParameters();
 
 	void closeUI();
+	void openUI();
 
 	bool isFenNotationValid(String);
 

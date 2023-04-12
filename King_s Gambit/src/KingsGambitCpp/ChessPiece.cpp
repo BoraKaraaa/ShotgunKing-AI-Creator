@@ -70,6 +70,9 @@ void ChessPiece::lastOneCountToPlay()
 
 void ChessPiece::moveTo(int x, int y) 
 {
+	moveImmediately(x, y);
+	return;
+
 	tween->connect("tween_completed", this, "moveTweenCompleted");
 	tween->interpolate_property(this, "position", get_position(), ChessBoard::chessBoardInstance->getSquarePivotPosition(x, y), 0.002, 10, 1);
 	tween->start();
