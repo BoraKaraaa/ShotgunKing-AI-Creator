@@ -17,6 +17,9 @@ void BlackKing::_register_methods()
 	register_method((char*)"gunHitPiece", &BlackKing::gunHitPiece);
 	register_method((char*)"unshowArrowAndMove", &BlackKing::unshowArrowAndMove);
 
+	register_method((char*)"bestGameMoves", &BlackKing::bestGameMoves);
+
+
 	register_property<BlackKing, int>((char*)"gunType", &BlackKing::setGunType, &BlackKing::getGunType, (int)GunType::SNIPER); // Default SNIPER
 
 	register_property<BlackKing, int>((char*)"heuristicStartingValue", &BlackKing::heuristicStartingValue, 0);
@@ -27,6 +30,8 @@ void BlackKing::_register_methods()
 void BlackKing::_init()
 {
 	blackKingInstance = this;
+
+	currSS = NULL;
 
 	switch (gunType)
 	{
@@ -118,7 +123,7 @@ void BlackKing::createAllPossibleSnapshots()
 {
 	// Creating All Possible Hit Snapsohts
 
-	gun->createAllPossibleHitNodes();
+	gun->createAllPossibleHitNodes(currSS);
 
 	// Creating All Possible Move Snapshots
 
@@ -153,6 +158,15 @@ void BlackKing::createAllPossibleSnapshots()
 void BlackKing::createMoveSnapshots(int lastX, int lastY)
 {
 	Snapshot newSnapshot;
+
+	if(currSS == NULL)
+	{
+		newSnapshot.parentSS = NULL;
+	}
+	else
+	{
+		newSnapshot.parentSS = currSS;
+	}
 
 	newSnapshot.isMoving = true;
 
@@ -193,6 +207,8 @@ void BlackKing::playBestMove()
 		{
 			gameResultText->set_text("YOU WON THE GAME");
 			Godot::print("GAME FINISHED -> YOU WIN");
+
+			playBestGame();
 		}
 		else
 		{
@@ -209,7 +225,7 @@ void BlackKing::playBestMove()
 	Snapshot currSnapshot = snapshotQueue.top();
 	snapshotQueue.pop();
 
-	currSS = currSnapshot;
+	currSS = &currSnapshot;
 
 	// Tree pruning with looking min successful path
 
@@ -516,28 +532,30 @@ void BlackKing::unshowArrowAndMove()
 	straightArrow->set_visible(false);
 	crossArrow->set_visible(false);
 
-	jumpAudio->play();
+	//jumpAudio->play();
 
-	moveTo(currSS.movePosition.x, currSS.movePosition.y);
+	moveTo((*currSS).movePosition.x, (*currSS).movePosition.y);
 }
 
 void BlackKing::gunHitPiece()
 {
 	//shotTimer->disconnect("timeout", this, "gunHitPiece");
 
-	shotAudio->play();
+	//shotAudio->play();
 
 	bulletParticle->set_emitting(true);
 
-	if(currSS.hitPiece == WhiteKing::whiteKingInstance)
+	if((*currSS).hitPiece == WhiteKing::whiteKingInstance)
 	{
 		if(WhiteKing::whiteKingInstance->canKill(gun->gunDamage))
 		{
 			winGame = true;
-			minSuccessfulPathLength = currSS.totalMoveCount;
+			minSuccessfulPathLength = (*currSS).totalMoveCount;
 			Godot::print(String::num_int64(minSuccessfulPathLength));
 
 			updateLeaderBoard(minSuccessfulPathLength);
+
+			bestGameLastSS = currSS;
 
 			if(minSuccessfulPathLength <= minMoveToKillWhiteKing)
 			{
@@ -545,13 +563,48 @@ void BlackKing::gunHitPiece()
 				gameResultText->set_text("YOU WON THE GAME");
 				TurnController::turnControllerInstance->stopTurn();
 				CountDown::countDownInstance->stopCountDown();
+
+				playBestGame();
 			}
 			
 		}
 	}
 
-	gun->hitPiece(currSS.hitPiece);
+	gun->hitPiece((*currSS).hitPiece);
 	targetIcon->set_position(Vector2(-50, -50));
+}
+
+void BlackKing::playBestGame()
+{
+	/*
+	Snapshot* iter = bestGameLastSS;
+	while(iter != NULL)
+	{
+		bestGameSnapshotStack.push(iter);
+		iter = iter->parentSS;
+	}
+	*/
+
+	//bestGameMoves();
+}
+
+void BlackKing::bestGameMoves()
+{
+	shotTimer->disconnect("timeout", this, "bestGameMoves");
+
+	if(bestGameLastSS->parentSS == NULL)
+	{
+		return;
+	}
+
+	goSnapshot(bestGameLastSS);
+
+	bestGameLastSS = bestGameLastSS->parentSS;
+
+	//goSnapshot(bestGameSnapshotStack.top());
+	//bestGameSnapshotStack.pop();
+
+	waitNSecond(1, "bestGameMoves");
 }
 
 void BlackKing::updateLeaderBoard(int moveCount)

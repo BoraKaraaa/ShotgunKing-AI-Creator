@@ -17,7 +17,7 @@ void Gun::hitPiece(ChessPiece* chessPiece)
 	chessPiece->takeDamage(gunDamage);
 }
 
-void Gun::createAllPossibleHitNodes()
+void Gun::createAllPossibleHitNodes(Snapshot* currSS)
 {
 	/*
 	if(ChessBoard::chessBoardInstance->getSquare(BlackKing::blackKingInstance->pX, BlackKing::blackKingInstance->pY)->threatCount > 0)
@@ -58,13 +58,15 @@ void Gun::createAllPossibleHitNodes()
 
 	for (ChessPiece* chessPiece : hittablePieces)
 	{
-		createHitSnapshots(chessPiece);
+		createHitSnapshots(currSS, chessPiece);
 	}
 }
 
-void Gun::createHitSnapshots(ChessPiece* chessPiece)
+void Gun::createHitSnapshots(Snapshot* currSS, ChessPiece* chessPiece)
 {
 	Snapshot newSnapshot;
+
+	newSnapshot.parentSS = (currSS == NULL) ? NULL : currSS;
 
 	newSnapshot.isMoving = false;
 

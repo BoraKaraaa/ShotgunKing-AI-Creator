@@ -40,13 +40,13 @@ void TurnController::startTurn()
 {
 	if(pTurnType == TurnType::BLACK)
 	{
-		//waitNSecond(1, "blackTurn");
-		blackTurn();
+		waitNSecond(1, "blackTurn");
+		//blackTurn();
 	}
 	else
 	{
-		//waitNSecond(1, "whiteTurn");
-		whiteTurn();
+		waitNSecond(1, "whiteTurn");
+		//whiteTurn();
 	}
 }
 

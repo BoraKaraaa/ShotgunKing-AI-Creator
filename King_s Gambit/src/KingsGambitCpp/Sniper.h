@@ -9,7 +9,7 @@ public:
 	~Sniper();
 
 	void searchHittableArea() override;
-	void createAllPossibleHitNodes() override;
+	void createAllPossibleHitNodes(Snapshot*) override;
 
 private:
 	int areaWidth;

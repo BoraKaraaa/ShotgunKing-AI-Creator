@@ -21,6 +21,12 @@ void ChessBoard::_register_methods()
 void ChessBoard::_init()
 {
 	chessBoardInstance = this;
+
+	firstSquareXtransform = 240;
+	firstSquareYTransform = 167;
+
+	twoSquareXDistanceDiff = 48;
+	twoSquareYDistanceDiff = 47;
 }
 
 ChessBoard::ChessBoard()

@@ -8,6 +8,7 @@
 #include <TextEdit.hpp>
 
 #include <algorithm>
+#include <stack>
 #include <queue>
 #include <map>
 
@@ -15,27 +16,7 @@
 #include "Gun.h"
 #include "GunType.h"
 
-struct Snapshot
-{
-	bool isMoving;
-	Vector2 movePosition; // if BlackKing will move
-
-	ChessPiece* hitPiece; // if BlackKing will hit
-
-	std::map<ChessPiece*, Vector2> chessPiecePositionDictioanry; // first piece always BlackKing
-	int totalMoveCount; // equal to tree depth
-	int heuristicValue;
-
-	bool operator<(const Snapshot& other) const
-	{
-		return heuristicValue < other.heuristicValue; // arrenge for prioraty queue prioritization
-	}
-
-	bool operator==(const Snapshot& other) const
-	{
-		return this == &other;
-	}
-};
+#include "Snapshot.h"
 
 class BlackKing : public ChessPiece
 {
@@ -93,6 +74,10 @@ protected:
 	Snapshot* isTwoSnapshotsEquals(Snapshot*, Snapshot*); // if equal return min totalMoveCount Snapshot if not equal return NULL
 
 private:
+
+	std::stack<Snapshot*> bestGameSnapshotStack;
+	Snapshot* bestGameLastSS;
+
 	int totalTry = 0;
 
 	Label* moveCounter;
@@ -103,7 +88,7 @@ private:
 
 	TextEdit* leaderBoard;
 
-	Snapshot currSS;
+	Snapshot* currSS;
 
 	GunType gunType;
 
@@ -125,6 +110,9 @@ private:
 	bool isDead = false;
 
 	String current_animation;
+
+	void playBestGame();
+	void bestGameMoves();
 
 	void calculateGunRotation(int, int);
 	void lookPosition(int, int);

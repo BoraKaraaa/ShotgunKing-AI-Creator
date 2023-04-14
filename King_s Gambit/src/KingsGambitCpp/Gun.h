@@ -6,6 +6,7 @@
 #include "TurnController.h"
 
 #include "CameraNoise.h"
+#include "Snapshot.h"
 
 class Gun 
 {
@@ -19,9 +20,9 @@ public:
 	std::vector<ChessPiece*> hittablePieces;
 
 	void virtual searchHittableArea() = 0;
-	void virtual createAllPossibleHitNodes();
+	void virtual createAllPossibleHitNodes(Snapshot*);
 
-	void virtual createHitSnapshots(ChessPiece*);
+	void virtual createHitSnapshots(Snapshot*, ChessPiece*);
 
 	void hitPiece(ChessPiece*);
 

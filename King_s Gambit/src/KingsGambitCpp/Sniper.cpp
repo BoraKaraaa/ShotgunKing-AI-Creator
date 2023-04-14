@@ -27,8 +27,8 @@ void Sniper::searchHittableArea()
 	}
 }
 
-void Sniper::createAllPossibleHitNodes()
+void Sniper::createAllPossibleHitNodes(Snapshot* currSS)
 {
 	searchHittableArea();
-	__super::createAllPossibleHitNodes();
+	__super::createAllPossibleHitNodes(currSS);
 }
