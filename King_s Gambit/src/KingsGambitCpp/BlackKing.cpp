@@ -36,8 +36,8 @@ void BlackKing::_init()
 	switch (gunType)
 	{
 		case GunType::SNIPER:
-			gun = new Sniper(2); // sniper shot area 2*2
-			break;
+			gun = new Sniper(2, 1); // sniper shot area 2*2 damage -> 1 (Default Values)
+		break;
 	}
 }
 
@@ -66,9 +66,29 @@ void BlackKing::_ready()
 
 	shotTimer = (Timer*)get_node("/root/MainScene/PieceHolder/BlackKing/ShotTimer");
 
+	gunDamage = (LineEdit*)get_node("/root/MainScene/GameUI2/Sniper/GunDamage");
+	gunRange = (LineEdit*)get_node("/root/MainScene/GameUI2/Sniper/GunRange");
+
 	current_animation = "Idle";
+
+	initGunParameters();
 }
 
+void BlackKing::initGunParameters()
+{
+	godot::String gunDamageString = (((LineEdit*)gunDamage)->get_text());
+	godot::String gunRangeString = (((LineEdit*)gunRange)->get_text());
+
+	if ((gunDamageString.is_valid_integer() && gunDamageString.to_int() != 0))
+	{
+		gun->gunDamage = gunDamageString.to_int();
+	}
+
+	if ((gunRangeString.is_valid_integer() && gunRangeString.to_int() != 0))
+	{
+		gun->gunRange = gunRangeString.to_int();
+	}
+}
 
 BlackKing::~BlackKing()
 {
@@ -617,7 +637,7 @@ void BlackKing::updateLeaderBoard(int moveCount)
 void BlackKing::setMinMoveToKillWhiteKing()
 {
 	minMoveToKillWhiteKing = ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare(this->pX, this->pY,
-		WhiteKing::whiteKingInstance->pX, WhiteKing::whiteKingInstance->pY) - 2 + 1;
+		WhiteKing::whiteKingInstance->pX, WhiteKing::whiteKingInstance->pY) - gun->gunRange + 1;
 
 	if (minMoveToKillWhiteKing < 1)
 	{

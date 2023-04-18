@@ -1,5 +1,26 @@
-﻿  ChessBoard.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(46,46): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(50,49): warning C4244: 'initializing': conversion from 'real_t' to 'size_t', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\ChessBoard.cpp(129,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+﻿  BlackKing.cpp
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(84,42): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(89,40): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(193,44): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(193,37): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(195,66): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(195,59): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(199,92): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(199,76): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(298,70): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(298,41): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(300,67): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(300,38): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(347,60): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(347,44): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(431,40): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(431,32): warning C4244: 'argument': conversion from 'int' to 'real_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(433,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(434,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(436,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(439,21): warning C4305: '*=': truncation from 'double' to 'float'
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(557,57): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(557,31): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(633,98): warning C4244: 'argument': conversion from 'float' to 'int64_t', possible loss of data
+C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\BlackKing.cpp(405): warning C4715: 'BlackKing::isTwoSnapshotsEquals': not all control paths return a value
   KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll

@@ -69,6 +69,8 @@ private:
 	Control* preGameUI;
 	Control* chessPieceInfoUIHolder;
 
+	Control* gunUI;
+
 	TextEdit* fenNotationText;
 
 	TextEdit* leaderBoard;

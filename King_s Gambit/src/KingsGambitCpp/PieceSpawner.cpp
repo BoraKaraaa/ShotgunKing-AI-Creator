@@ -57,6 +57,8 @@ void PieceSpawner::_ready()
 	preGameUI = (Control*)get_node("/root/MainScene/PreGameUI");
 	chessPieceInfoUIHolder = (Control*)get_node("/root/MainScene/ChessPieceInfoUIHolder");
 
+	gunUI = (Control*)get_node("/root/MainScene/GameUI2/Sniper");
+
 	fenNotationText = (TextEdit*)get_node("/root/MainScene/FenNotationText");
 	leaderBoard = (TextEdit*)get_node("/root/MainScene/LeaderBoard");
 
@@ -381,6 +383,7 @@ void PieceSpawner::closeUI()
 	chessPieceInfoUIHolder->set_visible(false);
 	usePrepHeuriscticValButton->set_visible(false);
 	fenNotationText->set_visible(false);
+	gunUI->set_visible(false);
 }
 
 void PieceSpawner::openUI()
@@ -389,6 +392,7 @@ void PieceSpawner::openUI()
 	totalQueuedPosText->set_visible(true);
 	pauseText->set_visible(true);
 	leaderBoard->set_visible(true);
+	countDown->set_visible(true);
 }
 
 void PieceSpawner::setChessPieceParametersToArray()

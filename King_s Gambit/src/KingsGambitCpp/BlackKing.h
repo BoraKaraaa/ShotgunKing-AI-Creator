@@ -6,6 +6,7 @@
 #include <AudioStreamPlayer2D.hpp>
 #include <Particles2D.hpp>
 #include <TextEdit.hpp>
+#include <LineEdit.hpp>
 
 #include <algorithm>
 #include <stack>
@@ -49,6 +50,8 @@ public:
 
 	void die() override;
 
+	void initGunParameters();
+
 	void setBlackKingParameters(int, int, int);
 
 protected:
@@ -87,6 +90,9 @@ private:
 	Label* queuedPositionAmountText;
 
 	TextEdit* leaderBoard;
+
+	LineEdit* gunDamage;
+	LineEdit* gunRange;
 
 	Snapshot* currSS;
 

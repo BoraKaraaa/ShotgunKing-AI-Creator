@@ -3,9 +3,10 @@
 #include "ChessBoard.h"
 #include "BlackKing.h"
 
-Sniper::Sniper(int areaW)
+Sniper::Sniper(int areaW, int gunD)
 {
-	areaWidth = areaW;
+	gunRange = areaW;
+	gunDamage = gunD;
 }
 
 Sniper::~Sniper()
@@ -19,7 +20,7 @@ void Sniper::searchHittableArea()
 
 	for (ChessPiece* whitePiece : TurnController::turnControllerInstance->whitePieces)
 	{
-		if(areaWidth >= ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare
+		if(gunRange >= ChessBoard::chessBoardInstance->twoSquareDistanceWithSquare
 			(BlackKing::blackKingInstance->pX, BlackKing::blackKingInstance->pY, whitePiece->pX, whitePiece->pY))
 		{
 			hittablePieces.push_back(whitePiece);

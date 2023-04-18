@@ -13,6 +13,7 @@ class Gun
 
 public:
 	int gunDamage = 1;
+	int gunRange = 2;
 
 	Gun();
 	~Gun();
