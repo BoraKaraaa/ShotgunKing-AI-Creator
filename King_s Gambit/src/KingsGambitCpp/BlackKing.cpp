@@ -576,7 +576,7 @@ void BlackKing::gunHitPiece()
 			updateLeaderBoard(minSuccessfulPathLength);
 
 			bestGameLastSS = currSS;
-
+			
 			if(minSuccessfulPathLength <= minMoveToKillWhiteKing)
 			{
 				Godot::print("GAME FINISHED -> YOU WIN");
@@ -586,6 +586,7 @@ void BlackKing::gunHitPiece()
 
 				playBestGame();
 			}
+			
 			
 		}
 	}
