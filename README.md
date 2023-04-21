@@ -11,3 +11,8 @@ Inspired by Shotgun King: Final Checkmate
 Made with GODOT 3.5 using GDNative
 
 Broad Description of Game AI: https://github.com/BoraKaraaa/King-s-Gambit/blob/main/ShotgunKingAI.pdf
+
+## Licanse
+
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
