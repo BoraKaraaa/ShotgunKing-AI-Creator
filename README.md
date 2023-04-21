@@ -7,5 +7,6 @@ To achieve this, I used the best-first search algorithm, which is a heuristic se
 Overall, this project demonstrates the potential of AI and heuristic search algorithms in enhancing gaming experiences. By allowing users to customize the heuristic parameters, this project also showcases the potential of user-driven AI development.
 
 Inspired by Shotgun King: Final Checkmate
+
 Made with GODOT 3.5 using GDNative
 Broad Description of AI: https://github.com/BoraKaraaa/King-s-Gambit/blob/main/ShotgunKingAI.pdf
