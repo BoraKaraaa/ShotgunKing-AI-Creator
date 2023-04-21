@@ -9,4 +9,5 @@ Overall, this project demonstrates the potential of AI and heuristic search algo
 Inspired by Shotgun King: Final Checkmate
 
 Made with GODOT 3.5 using GDNative
+
 Broad Description of AI: https://github.com/BoraKaraaa/King-s-Gambit/blob/main/ShotgunKingAI.pdf
