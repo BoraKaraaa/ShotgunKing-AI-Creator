@@ -29,7 +29,7 @@ void Gun::createAllPossibleHitNodes(Snapshot* currSS)
 			{
 				if(chessPiece->canKill(gunDamage))
 				{
-					createHitSnapshots(chessPiece);
+					createHitSnapshots(currSS, chessPiece);
 					break;
 				}
 			}
@@ -40,7 +40,7 @@ void Gun::createAllPossibleHitNodes(Snapshot* currSS)
 			if(ChessBoard::chessBoardInstance->getSquare(BlackKing::blackKingInstance->pX, BlackKing::blackKingInstance->pY)->threatCount <= 0)
 			{
 				chessPiece->changeSquareThreatCount(1);
-				createHitSnapshots(chessPiece);
+				createHitSnapshots(currSS, chessPiece);
 				break;
 			}
 				
@@ -51,15 +51,16 @@ void Gun::createAllPossibleHitNodes(Snapshot* currSS)
 	{
 		for(ChessPiece* chessPiece : hittablePieces)
 		{
-			createHitSnapshots(chessPiece);
+			createHitSnapshots(currSS, chessPiece);
 		}
 	}
 	*/
-
+	
 	for (ChessPiece* chessPiece : hittablePieces)
 	{
 		createHitSnapshots(currSS, chessPiece);
 	}
+	
 }
 
 void Gun::createHitSnapshots(Snapshot* currSS, ChessPiece* chessPiece)

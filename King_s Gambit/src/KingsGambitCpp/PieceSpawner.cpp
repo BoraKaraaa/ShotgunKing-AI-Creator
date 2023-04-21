@@ -84,7 +84,7 @@ void PieceSpawner::startGame()
 	closeUI();
 	openUI();
 
-	pressAudio->play();
+	//pressAudio->play();
 
 	// Spawn Pieces
 
