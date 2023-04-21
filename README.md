@@ -1,4 +1,4 @@
-# ShotfunKing-AI-Creator
+# ShotgunKing-AI-Creator
 
 As a part of a university project, I developed an AI player for Shotgun King: Final Checkmate that uses heuristic parameters to make the optimal move and win the game in the shortest amount of time possible. Additionally, I designed the project to allow users to customize the heuristic parameters used by the AI. By doing so, the user can experiment with different heuristic parameter values and observe how these impact the AI's performance.
 
