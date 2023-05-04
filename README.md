@@ -10,9 +10,11 @@ Inspired by Shotgun King: Final Checkmate
 
 Made with GODOT 3.5 using GDNative
 
+
 To play the game: https://hinkirmunkur.itch.io/shotgun-king-ai
 
 Broad Description of Game AI: https://github.com/BoraKaraaa/King-s-Gambit/blob/main/ShotgunKingAI.pdf
+
 
 ## Licanse
 
