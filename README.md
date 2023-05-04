@@ -14,7 +14,6 @@ Broad Description of Game AI: https://github.com/BoraKaraaa/King-s-Gambit/blob/m
 
 To play the game: https://hinkirmunkur.itch.io/shotgun-king-ai
 
-
 ## Licanse
 
 
