@@ -1,0 +1,3 @@
+[submodule "King_s Gambit/SimpleLibrary/godot-cpp"]
+	path = King_s Gambit/SimpleLibrary/godot-cpp
+	url = https://github.com/godotengine/godot-cpp

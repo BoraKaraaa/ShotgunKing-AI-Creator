@@ -1,16 +1,37 @@
-﻿  PieceSpawner.cpp
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(345,16): warning C4244: 'argument': conversion from 'int' to 'const real_t', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(404,17): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(410,24): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(424,56): warning C4244: '=': conversion from 'int64_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(451,17): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(467,30): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(473,32): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(479,32): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(485,30): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
-C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\PieceSpawner.cpp(491,31): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
-  KingsGambitCpp.vcxproj -> C:\Users\Bora\Documents\GodotProjects\King-s-Gambit\King_s Gambit\src\KingsGambitCpp\KingsGambitCpp.dll
+﻿  Bishop.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  BlackKing.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  CameraNoise.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\CameraNoise.h(3,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  ChessBoard.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessBoard.h(3,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  ChessPiece.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  CountDown.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\CountDown.h(3,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  GodotLib.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\TurnController.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Gun.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Knight.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Pawn.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  PieceSpawner.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\PieceSpawner.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Queen.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Rook.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Sniper.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Square.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Test.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\Test.h(3,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  TurnController.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\TurnController.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  WhiteKing.cpp
+C:\Users\bora\Documents\GitHub\ShotgunKing-AI-Creator\King_s Gambit\src\KingsGambitCpp\ChessPiece.h(2,10): fatal  error C1083: Cannot open include file: 'Godot.hpp': No such file or directory
+  Generating Code...
